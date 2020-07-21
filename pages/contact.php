@@ -1,7 +1,5 @@
-<div class="post">
-<h2>Contact</h2>
-
 <?php
+$infoMessage = "";
 if (!empty($_REQUEST['rva']) && $_REQUEST['rvb']) {
 	if ($_REQUEST['name'] && $_REQUEST['subject'] && $_REQUEST['message'] && $_REQUEST['filter'] && $_REQUEST['email']) {
 		if (($_REQUEST['filter'] == $_REQUEST['rva'] + $_REQUEST['rvb'])) {
@@ -19,27 +17,32 @@ if (!empty($_REQUEST['rva']) && $_REQUEST['rvb']) {
 		$message .= $_REQUEST['message'];
 
 		mail("rauenzi@outlook.com", $subject, $message, implode("\r\n", $headers));
-		echo "<span class=\"important\">Message Sent!</span><br /><br />";
+		$infoMessage = "<span class=\"important\">Message Sent!</span><br /><br />";
 		} 
 		else {
-		echo "<span class=\"important\">You messed up the spam filter.</span><br /><br />";
+		$infoMessage = "<span class=\"important\">You messed up the spam filter.</span><br /><br />";
 		}
 	}
 	else {
-	echo "<span class=\"important\">Please fill out all fields.</span><br /><br />";
+		$infoMessage = "<span class=\"important\">Please fill out all fields.</span><br /><br />";
 	}
 }
 $val1=mt_rand(1,9);
 $val2=mt_rand(1,9);
+
+render_template($home . "/templates/card.php", [
+"title" => "Contact",
+"content" => $infoMessage . '
+		<form method="post" action="">
+		<table id="contact">
+		<tr><td>Your name:</td><td><input type="text" name="name" /></td></tr>
+		<tr><td>Reason for contact:</td><td><input type="text" name="subject" /></td></tr>
+		<tr><td>Email:</td><td><input type="email" name="email" /></td></tr>
+		<tr><td>Spam filter <img src="/modules/captcha.php?op1=' . $val1 . '&op2=' . $val2 . '&op=plus" /></td><td><input type="text" name="filter" /></td></tr>
+		<tr><td class="textarea-label">Message:</td><td><textarea rows="10" cols="40" name="message" placeholder="Type here..."></textarea></td></tr>
+		<tr><td> </td><td><input type="hidden" name="rva" value="' . $val1 . '" /><input type="hidden" name="rvb" value="' . $val2 . '" /><input type="submit" value="Submit" /></td></tr>
+		</table>
+		</form>
+'
+]);
 ?>
-<form method="post" action="">
-<table id="contact">
-<tr><td>Your name:</td><td><input type="text" name="name" /></td></tr>
-<tr><td>Reason for contact:</td><td><input type="text" name="subject" /></td></tr>
-<tr><td>Email:</td><td><input type="email" name="email" /></td></tr>
-<tr><td>Spam filter <img src="/resources/image.php?op1=<?php echo $val1; ?>&op2=<?php echo $val2; ?>&op=plus" /></td><td><input type="text" name="filter" /></td></tr>
-<tr><td>Message:</td><td><textarea rows="10" cols="40" name="message" placeholder="Type here..."></textarea></td></tr>
-<tr><td> </td><td><input type="hidden" name="rva" value="<?php echo $val1; ?>" /><input type="hidden" name="rvb" value="<?php echo $val2; ?>" /><input type="submit" value="Submit" /></td></tr>
-</table>
-</form>
-</div>

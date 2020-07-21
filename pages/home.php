@@ -1,33 +1,27 @@
 <?php
-define("WP_USE_THEMES", false);
-include_once($home."/resources/carousel.php");
-// The Query
-query_posts( array ( 'category_name' => 'SiteNews', 'posts_per_page' => -1 ) );
+render_template($home."/templates/carousel.php");
 
-// The Loop
-while ( have_posts() ) : the_post();
-?>
-<div class="card minimizable">
-	<div class="card-header">
-		<h1>
-			<?php echo the_title(); ?>
-		</h1>
-		<span class="fa fa-minus button-minimize"></span>
-	</div>
-	<div class="card-body content-container">
-		<?php echo the_excerpt();?>
-	</div>
-	<div class="card-footer content-container">
-	Posted:
-	<?php the_time('m/d/Y'); ?> by:
-	<?php the_author_posts_link(); ?> |
-	<?php comments_popup_link('(0) Comments »', '(0) Comment »', '(%) Comments »'); ?>
-	</div>
-</div>
-<?php
-endwhile;
+function commentDisplay($num) {
+	if ($num == 0) return '(0) Comments »';
+	if ($num == 1) return '(1) Comment »';
+	return '(%) Comments »';
+}
 
-// Reset Query
-wp_reset_query();
+$posts = get_posts(array ( 'category_name' => 'SiteNews', 'posts_per_page' => -1 ));
+foreach($posts as $post) {
+	setup_postdata($post);
+
+	$date = get_the_time('m/d/Y');
+	$author = get_the_author_posts_link();
+	$comments = '<a href="' . get_comments_link() . '">' . commentDisplay(get_comments_number()) . "</a>";
+
+	render_template($home . "/templates/card.php", [
+		"minimizable" => true,
+		"title" => get_the_title($post),
+		"content" => get_the_excerpt($post),
+		"footer" => "Posted: $date by: $author | $comments"
+	]);
+}
+wp_reset_postdata();
 
 ?>

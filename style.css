@@ -1,7 +1,26 @@
-@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700);
-@import url(https://fonts.googleapis.com/css?family=Comfortaa:400,700);
+@font-face {
+  font-family: "Comfortaa";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local("Comfortaa Bold"), local("Comfortaa-Bold"), url(/fonts/Comfortaa-Bold.ttf) format("TrueType");
+}
 
-/* Comfortaa, Geo, Comfortaa */
+@font-face {
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Ubuntu Regular"), local("Ubuntu-Regular"), url(/fonts/Ubuntu-Regular.ttf) format("TrueType");
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local("Ubuntu Bold"), local("Ubuntu-Bold"), url(/fonts/Ubuntu-Bold.ttf) format("TrueType");
+}
 
 /* reset browser styles */
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
@@ -36,7 +55,7 @@ table {
 
 * {box-sizing: border-box;}
 
-html {background: #CCC url(/images/bg2.png) repeat-x left top;}
+html {background: #CCC url(/images/header_bg.png) repeat-x left top;}
 
 	/*background: url(images/scroll_top.jpg) no-repeat center top,
 	url(images/scroll_bottom.jpg) no-repeat center bottom,
@@ -45,7 +64,7 @@ html {background: #CCC url(/images/bg2.png) repeat-x left top;}
 body {
 	width: auto;
 	margin: 0px auto;
-	font-family: "Ubuntu", "Helvetica Neue",Helvetica,Verdana,Arial,sans-serif;
+	font-family: "Ubuntu", "Helvetica Neue", Helvetica, Verdana, Arial, sans-serif;
 	font-size: 100%;
 	font-smoothing: antialiased;
 	-moz-font-smoothing: grayscale;
@@ -56,7 +75,7 @@ body {
 
 h1 {
 	text-transform: uppercase;
-	font-family: 'Comfortaa',Verdana,Sans-serif;
+	font-family: "Comfortaa", Verdana, Sans-serif;
 	font-weight: bold;
 	font-size: 27pt;
 	color: black;
@@ -66,7 +85,7 @@ h1 {
 
 h2 {
 	text-transform: uppercase;
-	font-family: 'Comfortaa',Verdana,Sans-serif;
+	font-family: "Comfortaa", Verdana, Sans-serif;
 	font-weight: bold;
 	font-size: 22pt;
 	color: #2385dc;
@@ -76,12 +95,16 @@ h2 {
 
 h4 {
 	text-transform: uppercase;
-	font-family: 'Comfortaa',Verdana,Sans-serif;
+	font-family: "Comfortaa", Verdana, Sans-serif;
 	font-weight: bold;
 	font-size: 12pt;
 	color: #2385dc;
 	margin: 5px 0 0 0;
 	letter-spacing: 2px;
+}
+
+aside h4 {
+	color: #1e72bd;
 }
 
 a, a:visited, a:active {
@@ -104,7 +127,7 @@ input:focus, textarea:focus {
 }
 
 header {
-	font-family: 'Comfortaa',Verdana,Sans-serif;
+	font-family: "Comfortaa",Verdana,Sans-serif;
 	font-weight: bold;
 	height: 85px;
 	padding-top: 75px;
@@ -168,6 +191,18 @@ td.textarea-label {
 	margin-top: 23px;
 }
 
+#search .gsc-control-cse {
+	background: transparent;
+	border: none;
+	padding: 0;
+	box-sizing: content-box;
+}
+
+#search .gsc-search-button,
+#search .gsc-search-button-v2 {
+	box-sizing: content-box;
+}
+
 .slow-expand-text {
 	text-shadow: 4px 4px 10px #000000;
 	letter-spacing: initial;
@@ -188,8 +223,9 @@ td.textarea-label {
 .shadow-text {text-shadow: 4px 4px 10px #000000;}
 
 .accent-font {
-	font-family: 'Comfortaa',Verdana,Sans-serif;
+	font-family: "Comfortaa",Verdana,Sans-serif;
 	letter-spacing: 2px;
+	font-weight: 700;
 }
 
 button {cursor: pointer;}
@@ -374,7 +410,7 @@ section {
 
 .card .card-header h1 {
 	text-transform: uppercase;
-	font-family: 'Comfortaa',Verdana,Sans-serif;
+	font-family: "Comfortaa",Verdana,Sans-serif;
 	font-weight: bold;
 	font-size: 22pt;
 	color: white;
@@ -395,7 +431,11 @@ section {
 }
 
 .card .content-container {
-	overflow:auto;
+	overflow:hidden;
+}
+
+.card .content-container.collapsed {
+	overflow: hidden;
 }
 
 .footer-icon {
@@ -409,6 +449,17 @@ section {
 
 .card-footer.content-container {
     padding: 5px 16px;
+}
+
+.card-body {
+    height: auto;
+    overflow: hidden;
+    transition: height 300ms cubic-bezier(0.47, 0, 0.745, 0.715), padding 300ms cubic-bezier(0.47, 0, 0.745, 0.715);
+}
+
+.card-body.collapsed {
+	height: 0px;
+	padding: 0 16px;
 }
 
 
@@ -454,7 +505,7 @@ button.expand {
 @media only screen and (max-width: 1000px) {
 
 	* {box-sizing: border-box;}
-	html {background: url(images/bgcolor.png);}
+	html {background: #CBCBCB;}
 	body {margin-top: 70px;}
 
 	.expand {display: inline-block;}
@@ -579,11 +630,12 @@ code,pre {
 }
 
 footer {
-	background: rgb(35,133,220) url(images/bg3.png) repeat-x;
+	background: rgb(35,133,220) url(images/footer_bg.png) repeat-x;
 	clear: both;
 	padding-top:20px;
 	width: 100%;
 	overflow: auto;
+	color: white;
 }
 
 footer a, footer a:visited, footer a:active {
@@ -595,10 +647,10 @@ footer a:hover {
 }
 
 footer h4 {
-	font-family: 'Comfortaa',Verdana,Sans-serif;
+	font-family: "Comfortaa", Verdana,Sans-serif;
 	font-weight: bold;
 	font-size: 12pt;
-	color: black;
+	color: white;
 	margin: 0 0 5px 0;
 	border-bottom: 0px solid black;
 }
@@ -660,10 +712,10 @@ border-bottom: 2px solid black;
 .filesContainer .filename a[href*="."] {
 	background: url(/images/icons/text.png) no-repeat left center;
 }
-.filesContainer .filename a[href*="/"] {
+.filesContainer .filename.folder a {
 	background: url(/images/icons/folder.png) no-repeat left center;
 }
-.filesContainer .filename a[href*="../"] {
+.filesContainer .filename.folder a[href=".."] {
 	background: url(/images/icons/up.png) no-repeat left center;
 }
 .filesContainer .filename a[href$=".pdf"] {
@@ -689,7 +741,7 @@ background: #c4c4c4;
 }
 .filesContainer h3 {
 	font-size: 17pt;
-	font-family: 'Comfortaa',Verdana,Sans-serif;
+	font-family: "Comfortaa",Verdana,Sans-serif;
 	font-weight: bold;
 	color: #2385dc;
 	margin: 0 0 10px 0;
@@ -722,7 +774,7 @@ background: #c4c4c4;
   overflow: hidden;
 }
 
-.carousel > .slide > img {
+.carousel .slide img {
   max-height: 100%;
   max-width: 100%;
   width: auto;
@@ -734,6 +786,10 @@ background: #c4c4c4;
   right: 0;
   margin: auto;
   z-index:-1;
+}
+
+.carousel .slide img[data-link] {
+	cursor: pointer;
 }
 
 @keyframes slideright {

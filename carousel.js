@@ -1,5 +1,3 @@
-window.onload = function() {new Carousel("mainCarousel", 0, true, 600)};
-
 var Carousel = function(id, initialIndex, cyclic, transitionTimeDelay) {
   this.id = id;
   this.cycle = cyclic;
@@ -74,13 +72,13 @@ Carousel.prototype.showImage = function(request) {
 
 Carousel.prototype.updateImageMeta = function(image) {
   if (image.getAttribute("data-link")) {
-    image.style.cursor="pointer";
+    //image.style.cursor="pointer";
     image.onclick = function(e) {
       var link = e.target.getAttribute("data-link");
       window.open(link);
     }
   }
-  else {image.style.cursor = "default";}
+  //else {image.style.cursor = "default";}
 
   if (this.node.getElementsByClassName("count").length > 0) {
     this.node.getElementsByClassName("count")[0].innerHTML = (this.currentImage+1)+"/"+this.imageCount;
@@ -99,3 +97,11 @@ Carousel.validateIndex = function(request, min, max, shouldCycle) {
   }
   else if (request!==undefined) return request;
 }
+
+
+var setupCarousel = function() {
+	if (document.getElementById("mainCarousel")) new Carousel("mainCarousel", 0, true, 600);
+};
+
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", setupCarousel);
+else setupCarousel();

@@ -12,9 +12,9 @@ var SwipeDetection = function(touchsurface, callback, minSwipeDistance, maxDevia
         startLocation[0] = surface.pageX;
         startLocation[1] = surface.pageY;
         startTime = new Date().getTime();
-    }, false);
+    }, {passive: true});
 
-    touchsurface.addEventListener('touchmove', function(e){e.preventDefault();}, false);
+    touchsurface.addEventListener('touchmove', function(e){e.preventDefault();}, {passive: false});
 
     touchsurface.addEventListener('touchend', function(e){
         var surface = e.changedTouches[0];
@@ -32,7 +32,7 @@ var SwipeDetection = function(touchsurface, callback, minSwipeDistance, maxDevia
         }
         if (direction) handleSwipe(direction);
         e.preventDefault();
-    }, false);
+    }, {passive: false});
 }
 SwipeDetection.DIRECTION_UP = 1;
 SwipeDetection.DIRECTION_RIGHT = 2;
