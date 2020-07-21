@@ -8,7 +8,7 @@ function human_filesize($bytes, $decimals = 2) {
 	return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . " " . @$sz[$factor];
 }
 
-function listFiles($PATH,$URI,$TITLE = "Files") {
+function listFiles($PATH,$URI,$TITLE="Files") {
 	$currentDir=$PATH.$URI;
 	$pagearray = trim($URI,'/');
 	
@@ -25,8 +25,12 @@ function listFiles($PATH,$URI,$TITLE = "Files") {
 	//$prettypage = str_replace('/'," / ",$prettypage);
 	?>
 	
-	<div class="filesContainer card">
-	<h3><?php echo $TITLE; ?></h3>
+	<div class="filesContainer card minimizable">
+	<div class="card-header">
+	<h1><?php echo $TITLE; ?></h1>
+	<span class="fa fa-minus button-minimize"></span>
+	</div>
+	<div class="content-container">
 	<span class="directoryTree"><?php echo $prettypage;?></span>
 	<table><tr><th class="filename">Filename</th><th>Size</th><th>Updated</th></tr>
 	<?php
@@ -78,6 +82,6 @@ function listFiles($PATH,$URI,$TITLE = "Files") {
 	}
 
 	echo "</table>";
-	echo "</div>";
+	echo "</div></div>";
 }
 ?>
