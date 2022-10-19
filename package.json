@@ -1,0 +1,17 @@
+{
+  "name": "zackrauen.com",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "build": "npx eleventy",
+    "serve": "npx eleventy --serve",
+    "debug": "set DEBUG=Eleventy* & npx eleventy"
+  },
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "@11ty/eleventy": "^1.0.2",
+    "@11ty/eleventy-cache-assets": "^2.3.0"
+  }
+}
