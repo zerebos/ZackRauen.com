@@ -5,10 +5,11 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy("src/styles.css");
 
     return {
+        htmlTemplateEngine: "njk",
         dir: {
             input: "src",
             output: "dist",
-            data: "src/data",
+            data: "data",
         }
     }
 };
