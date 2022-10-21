@@ -156,8 +156,54 @@ window.addEventListener("scroll", event => {
 });
 
 
-
-
+/** @type {HTMLFormElement} */
+const contactForm = document.getElementById("contactform");
+contactForm.addEventListener("submit", async event => {
+    event.preventDefault();
+    try {
+        const payload = {
+            accessKey: "ac71a6cb-698e-426a-9a75-55586ff530f1",
+            name: contactForm.elements.namedItem("name").value,
+            email: contactForm.elements.namedItem("email").value,
+            subject: contactForm.elements.namedItem("subject").value,
+            honeypot: contactForm.elements.namedItem("honeypot").value,
+            message: contactForm.elements.namedItem("message").value,
+            replyTo: "@"
+        };
+        
+        const result = await fetch(contactForm.action, {
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        
+        const json = await result.json();
+        const submitButton = contactForm.querySelector("button");
+        if (json.success) {
+            contactForm.reset();
+            submitButton.classList.replace("btn-primary", "btn-success");
+            submitButton.textContent = "Message Sent!";
+        }
+        else {
+            submitButton.classList.replace("btn-primary", "btn-danger");
+            submitButton.textContent = "Could Not Send!";
+            submitButton.disabled = true;
+        }
+        setTimeout(() => {
+            submitButton.classList.replace(json.success ? "btn-success" : "btn-danger", "btn-primary");
+            submitButton.textContent = "Send Message!";
+            submitButton.disabled = false;
+        }, 5000);
+    }
+    catch (error) {
+        const submitButton = contactForm.querySelector("button");
+        submitButton.classList.replace("btn-primary", "btn-danger");
+        submitButton.textContent = "Something Went Wrong!";
+        submitButton.disabled = true;
+    }
+})
 
 
 

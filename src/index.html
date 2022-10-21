@@ -21,7 +21,6 @@
                     <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="#resume" class="nav-link">Resume</a></li>
                     <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
-                    <li class="nav-item"><a href="#blog" class="nav-link">My Blog</a></li>
                     <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
             </div>
@@ -69,13 +68,13 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    <a href="#" class="btn btn-primary py-3 px-3">Download CV</a>
+                    <a href="#" class="btn btn-primary">Download CV</a>
                 </div>
             </div>
             <div class="flex socials">
                 {% for label, value in socials %}
-                    <a href="{{value}}" class="animate-on-scroll fade-up" target="_blank" rel="noopener">
-                        <img src="https://zackrauen.com/images/social/{{label | lower}}_small.png" class="social-icon" alt="{{label}}" />
+                    <a href="{{value}}" class="{{label | lower}} animate-on-scroll fade-up" target="_blank" rel="noopener">
+                        <img src="assets/images/socials/{{label | lower}}_small.png" class="social-icon" alt="{{label}}" />
                     </a>
                 {% endfor %}
             </div>
@@ -139,169 +138,117 @@
             <div id="skills" class="resume-section">
                 <h2 class="heading animate-on-scroll fade-up">Skills</h2>
                 <div class="flex showcase">
-                    <div class="flex flex-justify column flex-33 animate-on-scroll fade-up">
-                        <div class="tile">
-                            <h2>Skill</h2>
+                    {% for skill in resume.skills.meters %}
+                        <div class="flex flex-justify column flex-33 animate-on-scroll fade-up">
+                            <div class="tile">
+                                <h2>{{skill.label}}</h2>
 
-                            <div class="meter">
-                                <h2>50%</h2>
-                                <svg class="graph percent-50" viewbox="0 0 100 100">
-                                    <circle cx="50" cy="50" r="40" stroke="#ccc" stroke-width="4" class="bar" />
-                                    <circle cx="50" cy="50" r="40" stroke="#428bca" stroke-width="4" class="fill" />
-                                </svg> 
-                            </div>
-
-
-                            <div class="flex details">
-                                <div class="flex-50">
-                                    <h4>28%</h4><span class="small text-gray">Last week</span>
+                                <div class="meter">
+                                    <h2>{{skill.value}}%</h2>
+                                    <svg class="graph" viewbox="0 0 100 100">
+                                        <circle cx="50" cy="50" r="40" stroke="#ccc" stroke-width="4" class="bar" />
+                                        <circle cx="50" cy="50" r="40" stroke="#428bca" stroke-width="4" class="fill" style="stroke-dashoffset: {{skill.value | percentOf(255) | subtractFrom(255)}};" />
+                                    </svg> 
                                 </div>
-                                <div class="flex-50">
-                                    <h4>60%</h4><span class="small text-gray">Last month</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-justify column flex-33 animate-on-scroll fade-up">
-                        <div class="tile">
-                            <h2>Skill</h2>
-
-                            <div class="meter">
-                                <h2>75%</h2>
-                                <svg class="graph percent-75" viewbox="0 0 100 100">
-                                    <circle cx="50" cy="50" r="40" stroke="#ccc" stroke-width="4" class="bar" />
-                                    <circle cx="50" cy="50" r="40" stroke="#428bca" stroke-width="4" class="fill" />
-                                </svg> 
-                            </div>
 
 
-                            <div class="flex details">
-                                <div class="flex-50">
-                                    <h4>28%</h4><span class="small text-gray">Last week</span>
-                                </div>
-                                <div class="flex-50">
-                                    <h4>60%</h4><span class="small text-gray">Last month</span>
+                                <div class="flex details">
+                                    {% for subskill in skill.subskills %}
+                                        <div class="flex-50">
+                                            <h4>{{subskill.value}}%</h4><span class="small text-gray">{{subskill.label}}</span>
+                                        </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="flex flex-justify column flex-33 animate-on-scroll fade-up">
-                        <div class="tile">
-                            <h2>Skill</h2>
-
-                            <div class="meter">
-                                <h2>100%</h2>
-                                <svg class="graph percent-100" viewbox="0 0 100 100">
-                                    <circle cx="50" cy="50" r="40" stroke="#ccc" stroke-width="4" class="bar" />
-                                    <circle cx="50" cy="50" r="40" stroke="#428bca" stroke-width="4" class="fill" />
-                                </svg> 
-                            </div>
-
-                            <div class="flex details">
-                                <div class="flex-50">
-                                    <h4>28%</h4><span class="small text-gray">Last week</span>
-                                </div>
-                                <div class="flex-50">
-                                    <h4>60%</h4><span class="small text-gray">Last month</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    {% endfor %}
                 <div class="flex flex-wrap">
-                    <div class="progress animate-on-scroll fade-up">
-                        <div class="progress-info"><h3>Photoshop</h3><span>90%</span></div>
-                        <div class="progress-bar"><div class="progress-fill" style="width: 90%"></div></div>
-                    </div>
-                    <div class="progress animate-on-scroll fade-up">
-                        <div class="progress-info"><h3>Photoshop2</h3><span>30%</span></div>
-                        <div class="progress-bar"><div class="progress-fill" style="width: 30%"></div></div>
-                    </div>
-                    <div class="progress animate-on-scroll fade-up">
-                        <div class="progress-info"><h3>Photoshop3</h3><span>66%</span></div>
-                        <div class="progress-bar"><div class="progress-fill" style="width: 66%"></div></div>
-                    </div>
-                    <div class="progress animate-on-scroll fade-up">
-                        <div class="progress-info"><h3>Photoshop4</h3><span>12%</span></div>
-                        <div class="progress-bar"><div class="progress-fill" style="width: 12%"></div></div>
-                    </div>
-                    <div class="progress animate-on-scroll fade-up">
-                        <div class="progress-info"><h3>Photoshop5</h3><span>75%</span></div>
-                        <div class="progress-bar"><div class="progress-fill" style="width: 75%"></div></div>
-                    </div>
-                    <div class="progress animate-on-scroll fade-up">
-                        <div class="progress-info"><h3>Photoshop6</h3><span>100%</span></div>
-                        <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
-                    </div>
+                    {% for skill in resume.skills.bars %}
+                        <div class="progress animate-on-scroll fade-up">
+                            <div class="progress-info"><h3>{{skill.label}}</h3><span>{{skill.value}}%</span></div>
+                            <div class="progress-bar"><div class="progress-fill" style="width: {{skill.value}}%"></div></div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="flex column padded" id="projects">
+    <section class="flex container column padded" id="projects">
         <div class="flex container column heading animate-on-scroll fade-up">
             <h2>Projects</h2>
-            <p>A small sample of my work. More can be found on <a href="https://github.com/rauenzi" target="_blank" rel="noopener noreferrer">my GitHub</a>.</p>
+            <p>A small sample of my work. More can be found on my <a href="https://github.com/rauenzi" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
         </div>
         <div class="flex flex-wrap">
-            <div class="flex flex-33 project animate-on-scroll fade-up">
-                <a href="#" class="wrapper">
-                    <img src="assets/images/bdicon.png" class="icon" />
-                    <div class="info">
-                        <h3>BetterDiscord</h3>
-                        <p>A popular 3rd party modification for the Discord instant messaging platform.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="flex flex-33 project animate-on-scroll fade-up">
-                <a href="#" class="wrapper">
-                    <img src="assets/images/bdicon.png" class="icon" />
-                    <div class="info">
-                        <h3>BetterDiscord</h3>
-                        <p>A popular 3rd party modification for the Discord instant messaging platform.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="flex flex-33 project animate-on-scroll fade-up">
-                <a href="#" class="wrapper">
-                    <img src="assets/images/bdicon.png" class="icon" />
-                    <div class="info">
-                        <h3>BetterDiscord</h3>
-                        <p>A popular 3rd party modification for the Discord instant messaging platform.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="flex flex-33 project animate-on-scroll fade-up">
-                <a href="#" class="wrapper">
-                    <img src="assets/images/bdicon.png" class="icon" />
-                    <div class="info">
-                        <h3>BetterDiscord</h3>
-                        <p>A popular 3rd party modification for the Discord instant messaging platform.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="flex flex-33 project animate-on-scroll fade-up">
-                <a href="#" class="wrapper">
-                    <img src="assets/images/bdicon.png" class="icon" />
-                    <div class="info">
-                        <h3>BetterDiscord</h3>
-                        <p>A popular 3rd party modification for the Discord instant messaging platform.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="flex flex-33 project animate-on-scroll fade-up">
-                <a href="#" class="wrapper">
-                    <img src="assets/images/bdicon.png" class="icon" />
-                    <div class="info">
-                        <h3>BetterDiscord</h3>
-                        <p>A popular 3rd party modification for the Discord instant messaging platform.</p>
-                    </div>
-                </a>
-            </div>
+            {% for proj in collections.projects %}
+                <div class="flex flex-33 project animate-on-scroll fade-up">
+                    <a href="{{proj.url}}" class="wrapper">
+                        <img src="{{proj.data.icon}}" class="icon" />
+                        <div class="info">
+                            <h3>{{proj.data.title}}</h3>
+                            <p>{{proj.data.blurb}}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
         </div>
     </section>
-    <section class="flex container padded" id="blog"></section>
-    <section class="flex container padded" id="contact"></section>
+    <section class="flex container half-padded" id="contact">
+        <div class="flex flex-50 column heading animate-on-scroll fade-up">
+            <h2>Contact Me</h2>
+            <p>Feel free to contact me using this form!</p>
+            <img src="assets/images/contact.jpg" class="contact-avatar">
+            <p>You can also reach out on <a href="{{socials.LinkedIn}}" target="_blank">LinkedIn</a>.</p>
+        </div>
+        <form action="https://api.staticforms.xyz/submit" method="post" id="contactform" class="flex flex-50 column animate-on-scroll fade-up">
+            <input type="hidden" name="accessKey" value="ac71a6cb-698e-426a-9a75-55586ff530f1">
+            <input type="text" name="honeypot" id="honeypot">
+            <input class="text-input" type="text" name="name" placeholder="Your Name" required>
+            <input class="text-input" type="email" name="email" placeholder="Your Email" required>
+            <input class="text-input" type="text" name="subject" placeholder="Subject" required>
+            <textarea class="text-input" name="message" cols="20" rows="7" placeholder="Message" required></textarea>
+            <button class="btn btn-primary" type="Submit">Send Message</button>
+        </form>
+    </section>
+    <footer class="flex half-padded">
+        <div class="flex no-wrap column container">
+            <div class="flex socials">
+                {% for label, value in socials %}
+                    <a href="{{value}}" class="{{label | lower}} animate-on-scroll fade-up" target="_blank" rel="noopener">
+                        <img src="assets/images/socials/{{label | lower}}_small.png" class="social-icon" alt="{{label}}" />
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="flex flex-space-evenly">
+                <div class="flex column links">
+                    <h2>Links</h2>
+                    <ul>
+                        <li><a href="#home" class="nav-link active">Home</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                        <li><a href="#resume" class="nav-link">Resume</a></li>
+                        <li><a href="#projects" class="nav-link">Projects</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="flex column about">
+                    <h2>About</h2>
+                    <p>This website is completely static and generated from locally cached data and built using an SSG. It is also completely open source! Feel free to take a look at it on <a href="#" target="_blank">GitHub</a>.</p>
+                </div>
+                <div class="flex column credits">
+                    <h2>Credits</h2>
+                    <ul>
+                        <li>Built with &#x2764; using <a href="https://www.11ty.dev/" target="_blank">11ty</a></li>
+                        <li>Contact form using <a href="https://www.staticforms.xyz/" target="_blank">StaticForms</a></li>
+                        <li>Hex background by <a href="https://www.freepik.com/free-vector/abstract-techno-banner-with-hexagonal-design_10412350.htm#query=hex%20pattern&position=11&from_view=search&track=sph" target="_blank">kjpargeter</a></li>
+                        <li>Layout inspired by <a href="https://colorlib.com/wp/template/ronaldo/" target="_blank">Colorlib</a></li>
+                        <li>Material icons from <a href="https://material.io/" target="_blank">Google</a></li>
+                        <li>Testing and input from <a href="https://github.com/ItMeSarah/" target="_blank">ItMeSarah</a></li>
+                        <li>Input from <a href="https://github.com/qwerasd205" target="_blank">Qwerasd</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
     <script src="scripts.js"></script>
 </body>
 </html>

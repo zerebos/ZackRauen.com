@@ -1,0 +1,7 @@
+{{repo}}
+
+{% set something = github.projects | getElementByKey("full_name", repo) %}
+
+{{something}}
+
+{{content | safe}}

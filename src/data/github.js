@@ -5,7 +5,7 @@ module.exports = async function() {
     const results = [];
     for (const repo of repos) {
         results.push(await cachedFetch(`https://api.github.com/repos/${repo.includes("/") ? repo : "rauenzi/" + repo}`, {
-            duration: "1d", // 1 day
+            duration: "1h", // 1 day
             type: "json" // also supports "text" or "buffer"
         }));
     }
