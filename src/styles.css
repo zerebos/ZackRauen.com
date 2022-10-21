@@ -36,6 +36,7 @@ body {
     line-height: 1.8;
     font-weight: 400;
     color: var(--text-primary);
+    overflow-x: hidden;
 }
 
 .container {
@@ -420,7 +421,12 @@ button.expand {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items:center;
+    align-items: center;
+    /* padding: 100px 100px; */
+    height: 550px;
+    width: 550px;
+    background: radial-gradient(circle, rgba(29, 29, 29, 1) 50%, rgba(0, 0, 0, 0) 80%);
+    background-size: contain;
 }
 
 .fullscreen h1 {
@@ -1237,6 +1243,14 @@ footer p {
         height: auto;
         box-shadow: 0 .5rem 1rem rgba(0,0,0,0.15);
         transition: width .5s
+    }
+
+    #resume .heading {
+        text-align: center;
+    }
+
+    #resume .resume-entry {
+        padding: 1.5rem;
     }
 }
 
