@@ -1,0 +1,16 @@
+{% extends "./base.njk" %}
+
+{% block content %}
+<div class="flex container splitview">
+    <div class="flex flex-66 left">
+        {% block left %}
+            {{content | safe}}
+        {% endblock %}
+    </div>
+    <div class="flex flex-33 column right">
+        {% block right %}
+            {{content | safe}}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

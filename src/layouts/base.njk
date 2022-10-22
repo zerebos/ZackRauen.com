@@ -1,0 +1,105 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Profile</title>
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body class="dark">
+    <div class="sticky-wrap">
+        <nav id="main-nav" class="collapse">
+            <div class="container">
+                <span class="brand">ZackRauen</span>
+                <button id="menuButton" class="expand left" aria-label="Menu">
+                    <span class="rectangle"></span>
+                    <span class="rectangle"></span>
+                    <span class="rectangle"></span>
+                </button>
+                <ul class="navbar-nav nav ml-auto">
+                    <li class="nav-item"><a href="/#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="/#about" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="/#resume" class="nav-link">Resume</a></li>
+                    <li class="nav-item"><a href="/#projects" class="nav-link">Projects</a></li>
+                    <li class="nav-item"><a href="/#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    {% block content %}
+        {{content | safe}}
+    {% endblock %}
+    <footer class="flex half-padded">
+        <div class="flex no-wrap column container">
+            <div class="flex socials">
+                {% for label, value in socials %}
+                    <a href="{{value}}" class="{{label | lower}} animate-on-scroll fade-up" target="_blank" rel="noopener">
+                        <img src="/assets/images/socials/{{label | lower}}_small.png" class="social-icon" alt="{{label}}" />
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="flex flex-space-evenly">
+                <div class="flex column links animate-on-scroll fade-up">
+                    <h2>Links</h2>
+                    <ul>
+                        <li><a href="/#home" class="nav-link active">Home</a></li>
+                        <li><a href="/#about" class="nav-link">About</a></li>
+                        <li><a href="/#resume" class="nav-link">Resume</a></li>
+                        <li><a href="/#projects" class="nav-link">Projects</a></li>
+                        <li><a href="/#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="flex column about animate-on-scroll fade-up">
+                    <h2>About</h2>
+                    <p>This website is completely static and generated from locally cached data and built using an SSG. It is also completely open source! Feel free to take a look at it on <a href="/#" target="_blank">GitHub</a>.</p>
+                </div>
+                <div class="flex column credits animate-on-scroll fade-up">
+                    <h2>Credits</h2>
+                    <ul>
+                        <li>Built with &#x2764; using <a href="https://www.11ty.dev/" target="_blank">11ty</a></li>
+                        <li>Contact form using <a href="https://www.staticforms.xyz/" target="_blank">StaticForms</a></li>
+                        <li>Hex background by <a href="https://www.freepik.com/free-vector/abstract-techno-banner-with-hexagonal-design_10412350.htm#query=hex%20pattern&position=11&from_view=search&track=sph" target="_blank">kjpargeter</a></li>
+                        <li>Layout inspired by <a href="https://colorlib.com/wp/template/ronaldo/" target="_blank">Colorlib</a></li>
+                        <li>Material icons from <a href="https://material.io/" target="_blank">Google</a></li>
+                        <li>Testing and input from <a href="https://github.com/ItMeSarah/" target="_blank">ItMeSarah</a></li>
+                        <li>Input from <a href="https://github.com/qwerasd205" target="_blank">Qwerasd</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+        const scrollElements = document.querySelectorAll(".animate-on-scroll, .resume-entry");
+        const getViewportHeight = () => window.innerHeight || document.documentElement.clientHeight;
+        const elementInView = (el, dividend = 1) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return elementTop <= getViewportHeight() / dividend;
+        };
+
+        const elementOutofView = (el) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return elementTop > getViewportHeight();
+        };
+
+        const displayScrollElement = (element) => {
+            if (!isMobile) element.classList.add("animate");
+        };
+
+        const hideScrollElement = (element) => {
+            if (!isMobile) element.classList.remove("animate");
+        };
+
+        const handleScrollAnimation = () => {
+            scrollElements.forEach((el) => {
+                if (elementInView(el, 1.05)) displayScrollElement(el);
+                // else if (elementOutofView(el)) hideScrollElement(el);
+            })
+        }
+
+        window.addEventListener("scroll", () => { 
+            handleScrollAnimation();
+        });
+    </script>
+</body>
+</html>

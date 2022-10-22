@@ -15,7 +15,16 @@ module.exports = function (eleventyConfig) {
 
     eleventyConfig.addFilter("getElementByKey", (array, key, value) => {
         return array.find(e => e[key] === value);
-    })
+    });
+
+    eleventyConfig.addFilter("stringify", (json, indent = 4) => {
+        return JSON.stringify(json, null, indent);
+    });
+
+    eleventyConfig.addFilter("date", (dateTime, format = "LL") => {
+        const formatter = Intl.DateTimeFormat(format);
+        return formatter.format(new Date(dateTime));
+    });
 
     function getPosts(collectionApi) {
         return collectionApi.getFilteredByGlob("./src/projects/*.md");

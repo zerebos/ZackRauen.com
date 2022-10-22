@@ -1,254 +1,189 @@
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Profile</title>
-<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-</head>
-<body class="dark">
-    <div class="sticky-wrap">
-        <nav id="main-nav" class="collapse">
-            <div class="container">
-                <span class="brand">ZackRauen</span>
-                <button id="menuButton" class="expand left" aria-label="Menu">
-                    <span class="rectangle"></span>
-                    <span class="rectangle"></span>
-                    <span class="rectangle"></span>
-                </button>
-                <ul class="navbar-nav nav ml-auto">
-                    <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
-                    <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="#resume" class="nav-link">Resume</a></li>
-                    <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
-                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
+---
+layout: base.njk
+---
+
+<section class="fullscreen" id="home">
+    <!-- <div id="matrix"></div> -->
+    <!-- <canvas id="matrix-canvas"></canvas> -->
+    <div class="container">
+        <div class="title">
+            <h3>Hey there! I'm</h3>
+            <h1>Zack Rauen</h1>
+            <h2>And I'm <span id="jobtitle">an Engineer</span></h2>
+            <div class="content">
+                <div class="stat">
+                    <div class="label">Repos</div>
+                    <div class="value">{{github.count}}</div>
+                </div>
+                <div class="stat">
+                    <div class="label">Stars</div>
+                    <div class="value">{{github.stars}}</div>
+                </div>
+                <div class="stat">
+                    <div class="label">Issues</div>
+                    <div class="value">{{github.issues}}</div>
+                </div>
             </div>
+        </div>
+        <a class="btn btn-primary btn-fab" href="#about">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+        </a>
+    </div>
+</section>
+<section class="flex container half-padded" id="about">
+    <div class="flex column">
+        <div class="flex">
+            <div class="flex-50 animate-on-scroll fade-up"><img id="myuglymug" src="assets/images/self.png" /></div>
+            <div class="flex-50 content-pad animate-on-scroll fade-up">
+                <div class="flex column">
+                    <h2>About Me</h2>
+                    <p>{{about.blurb}}</p>
+                    <ul class="about-info">
+                        {% for label, value in about.fields %}
+                            <li><span class="label">{{label}}</span> <span>{{value}}</span></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <a href="#" class="btn btn-primary">Download CV</a>
+            </div>
+        </div>
+        <div class="flex socials">
+            {% for label, value in socials %}
+                <a href="{{value}}" class="{{label | lower}} animate-on-scroll fade-up" target="_blank" rel="noopener">
+                    <img src="assets/images/socials/{{label | lower}}_small.png" class="social-icon" alt="{{label}}" />
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="flex container padded" id="resume">
+    <div class="flex-25 resume-nav-wrap">
+        <nav id="resume-nav">
+            <ul>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#skills">Skills</a></li>
+            </ul>
         </nav>
     </div>
-    <section class="fullscreen" id="home">
-        <!-- <div id="matrix"></div> -->
-        <canvas id="matrix-canvas"></canvas>
-        <div class="container">
-            <div class="title">
-                <h3>Hey there! I'm</h3>
-                <h1>Zack Rauen</h1>
-                <h2>And I'm <span id="jobtitle">an Engineer</span></h2>
-                <div class="content">
-                    <div class="stat">
-                        <div class="label">Repos</div>
-                        <div class="value">{{github.count}}</div>
+    <div class="flex-75">
+        <div id="experience" class="resume-section">
+            <h2 class="heading animate-on-scroll fade-up">Experience</h2>
+            {% for exp in resume.experience %}
+                <div class="resume-entry">
+                    <div class="resume-icon experience"></div>
+                    <div class="resume-info">
+                        <span class="date">{{exp.start}} - {{exp.end}}</span>
+                        <h2>{{exp.title}}</h2>
+                        <span class="company">{{exp.company}}</span>
+                        <p>{{exp.blurb}}</p>
                     </div>
-                    <div class="stat">
-                        <div class="label">Stars</div>
-                        <div class="value">{{github.stars}}</div>
-                    </div>
-                    <div class="stat">
-                        <div class="label">Issues</div>
-                        <div class="value">{{github.issues}}</div>
-                    </div>
-                </div>
-            </div>
-            <a class="btn btn-primary btn-fab" href="#about">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
-            </a>
-        </div>
-    </section>
-    <section class="flex container half-padded" id="about">
-        <div class="flex column">
-            <div class="flex">
-                <div class="flex-50 animate-on-scroll fade-up"><img id="myuglymug" src="assets/images/self.png" /></div>
-                <div class="flex-50 content-pad animate-on-scroll fade-up">
-                    <div class="flex column">
-                        <h2>About Me</h2>
-                        <p>{{about.blurb}}</p>
-                        <ul class="about-info">
-                            {% for label, value in about.fields %}
-                                <li><span class="label">{{label}}</span> <span>{{value}}</span></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <a href="#" class="btn btn-primary">Download CV</a>
-                </div>
-            </div>
-            <div class="flex socials">
-                {% for label, value in socials %}
-                    <a href="{{value}}" class="{{label | lower}} animate-on-scroll fade-up" target="_blank" rel="noopener">
-                        <img src="assets/images/socials/{{label | lower}}_small.png" class="social-icon" alt="{{label}}" />
-                    </a>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-    
-    <section class="flex container padded" id="resume">
-        <div class="flex-25 resume-nav-wrap">
-            <nav id="resume-nav">
-                <ul>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#education">Education</a></li>
-                    <li><a href="#publications">Publications</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                </ul>
-            </nav>
-        </div>
-        <div class="flex-75">
-            <div id="experience" class="resume-section">
-                <h2 class="heading animate-on-scroll fade-up">Experience</h2>
-                {% for exp in resume.experience %}
-                    <div class="resume-entry">
-                        <div class="resume-icon experience"></div>
-                        <div class="resume-info">
-                            <span class="date">{{exp.start}} - {{exp.end}}</span>
-                            <h2>{{exp.title}}</h2>
-                            <span class="company">{{exp.company}}</span>
-                            <p>{{exp.blurb}}</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            <div id="education" class="resume-section">
-                <h2 class="heading animate-on-scroll fade-up">Education</h2>
-                {% for edu in resume.education %}
-                    <div class="resume-entry">
-                        <div class="resume-icon education"></div>
-                        <div class="resume-info">
-                            <span class="date">{{edu.start}} - {{edu.end}}</span>
-                            <h2>{{edu.degree}}</h2>
-                            <span class="company">{{edu.school}}</span>
-                            <p>{{edu.blurb}}</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            <div id="publications" class="resume-section">
-                <h2 class="heading animate-on-scroll fade-up">Publications &amp; Awards</h2>
-                {% for pub in resume.publications %}
-                    <div class="resume-entry">
-                        <div class="resume-icon publication"></div>
-                        <div class="resume-info">
-                            <span class="date">{{pub.date}}</span>
-                            <h2>{{pub.journal}}</h2>
-                            <span class="company">{{pub.authors}}</span>
-                            <p>{{pub.title}}</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            <div id="skills" class="resume-section">
-                <h2 class="heading animate-on-scroll fade-up">Skills</h2>
-                <div class="flex showcase">
-                    {% for skill in resume.skills.meters %}
-                        <div class="flex flex-justify column flex-33 animate-on-scroll fade-up">
-                            <div class="tile">
-                                <h2>{{skill.label}}</h2>
-
-                                <div class="meter">
-                                    <h2>{{skill.value}}%</h2>
-                                    <svg class="graph" viewbox="0 0 100 100">
-                                        <circle cx="50" cy="50" r="40" stroke="#ccc" stroke-width="4" class="bar" />
-                                        <circle cx="50" cy="50" r="40" stroke="#428bca" stroke-width="4" class="fill" style="stroke-dashoffset: {{skill.value | percentOf(255) | subtractFrom(255)}};" />
-                                    </svg> 
-                                </div>
-
-
-                                <div class="flex details">
-                                    {% for subskill in skill.subskills %}
-                                        <div class="flex-50">
-                                            <h4>{{subskill.value}}%</h4><span class="small text-gray">{{subskill.label}}</span>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                <div class="flex flex-wrap">
-                    {% for skill in resume.skills.bars %}
-                        <div class="progress animate-on-scroll fade-up">
-                            <div class="progress-info"><h3>{{skill.label}}</h3><span>{{skill.value}}%</span></div>
-                            <div class="progress-bar"><div class="progress-fill" style="width: {{skill.value}}%"></div></div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="flex container column padded" id="projects">
-        <div class="flex container column heading animate-on-scroll fade-up">
-            <h2>Projects</h2>
-            <p>A small sample of my work. More can be found on my <a href="https://github.com/rauenzi" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
-        </div>
-        <div class="flex flex-wrap">
-            {% for proj in collections.projects %}
-                <div class="flex flex-33 project animate-on-scroll fade-up">
-                    <a href="{{proj.url}}" class="wrapper">
-                        <img src="{{proj.data.icon}}" class="icon" />
-                        <div class="info">
-                            <h3>{{proj.data.title}}</h3>
-                            <p>{{proj.data.blurb}}</p>
-                        </div>
-                    </a>
                 </div>
             {% endfor %}
         </div>
-    </section>
-    <section class="flex container half-padded" id="contact">
-        <div class="flex flex-50 column heading animate-on-scroll fade-up">
-            <h2>Contact Me</h2>
-            <p>Feel free to contact me using this form!</p>
-            <img src="assets/images/contact.jpg" class="contact-avatar">
-            <p>You can also reach out on <a href="{{socials.LinkedIn}}" target="_blank">LinkedIn</a>.</p>
+        <div id="education" class="resume-section">
+            <h2 class="heading animate-on-scroll fade-up">Education</h2>
+            {% for edu in resume.education %}
+                <div class="resume-entry">
+                    <div class="resume-icon education"></div>
+                    <div class="resume-info">
+                        <span class="date">{{edu.start}} - {{edu.end}}</span>
+                        <h2>{{edu.degree}}</h2>
+                        <span class="company">{{edu.school}}</span>
+                        <p>{{edu.blurb}}</p>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-        <form action="https://api.staticforms.xyz/submit" method="post" id="contactform" class="flex flex-50 column animate-on-scroll fade-up">
-            <input type="hidden" name="accessKey" value="ac71a6cb-698e-426a-9a75-55586ff530f1">
-            <input type="text" name="honeypot" id="honeypot">
-            <input class="text-input" type="text" name="name" placeholder="Your Name" required>
-            <input class="text-input" type="email" name="email" placeholder="Your Email" required>
-            <input class="text-input" type="text" name="subject" placeholder="Subject" required>
-            <textarea class="text-input" name="message" cols="20" rows="7" placeholder="Message" required></textarea>
-            <button class="btn btn-primary" type="Submit">Send Message</button>
-        </form>
-    </section>
-    <footer class="flex half-padded">
-        <div class="flex no-wrap column container">
-            <div class="flex socials">
-                {% for label, value in socials %}
-                    <a href="{{value}}" class="{{label | lower}} animate-on-scroll fade-up" target="_blank" rel="noopener">
-                        <img src="assets/images/socials/{{label | lower}}_small.png" class="social-icon" alt="{{label}}" />
-                    </a>
+        <div id="publications" class="resume-section">
+            <h2 class="heading animate-on-scroll fade-up">Publications &amp; Awards</h2>
+            {% for pub in resume.publications %}
+                <div class="resume-entry">
+                    <div class="resume-icon publication"></div>
+                    <div class="resume-info">
+                        <span class="date">{{pub.date}}</span>
+                        <h2>{{pub.journal}}</h2>
+                        <span class="company">{{pub.authors}}</span>
+                        <p>{{pub.title}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div id="skills" class="resume-section">
+            <h2 class="heading animate-on-scroll fade-up">Skills</h2>
+            <div class="flex showcase">
+                {% for skill in resume.skills.meters %}
+                    <div class="flex flex-justify column flex-33 animate-on-scroll fade-up">
+                        <div class="tile">
+                            <h2>{{skill.label}}</h2>
+
+                            <div class="meter">
+                                <h2>{{skill.value}}%</h2>
+                                <svg class="graph" viewbox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="40" stroke="#ccc" stroke-width="4" class="bar" />
+                                    <circle cx="50" cy="50" r="40" stroke="#428bca" stroke-width="4" class="fill" style="stroke-dashoffset: {{skill.value | percentOf(255) | subtractFrom(255)}};" />
+                                </svg> 
+                            </div>
+
+
+                            <div class="flex details">
+                                {% for subskill in skill.subskills %}
+                                    <div class="flex-50">
+                                        <h4>{{subskill.value}}%</h4><span class="small text-gray">{{subskill.label}}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            <div class="flex flex-wrap">
+                {% for skill in resume.skills.bars %}
+                    <div class="progress animate-on-scroll fade-up">
+                        <div class="progress-info"><h3>{{skill.label}}</h3><span>{{skill.value}}%</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: {{skill.value}}%"></div></div>
+                    </div>
                 {% endfor %}
             </div>
-            <div class="flex flex-space-evenly">
-                <div class="flex column links">
-                    <h2>Links</h2>
-                    <ul>
-                        <li><a href="#home" class="nav-link active">Home</a></li>
-                        <li><a href="#about" class="nav-link">About</a></li>
-                        <li><a href="#resume" class="nav-link">Resume</a></li>
-                        <li><a href="#projects" class="nav-link">Projects</a></li>
-                        <li><a href="#contact" class="nav-link">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="flex column about">
-                    <h2>About</h2>
-                    <p>This website is completely static and generated from locally cached data and built using an SSG. It is also completely open source! Feel free to take a look at it on <a href="#" target="_blank">GitHub</a>.</p>
-                </div>
-                <div class="flex column credits">
-                    <h2>Credits</h2>
-                    <ul>
-                        <li>Built with &#x2764; using <a href="https://www.11ty.dev/" target="_blank">11ty</a></li>
-                        <li>Contact form using <a href="https://www.staticforms.xyz/" target="_blank">StaticForms</a></li>
-                        <li>Hex background by <a href="https://www.freepik.com/free-vector/abstract-techno-banner-with-hexagonal-design_10412350.htm#query=hex%20pattern&position=11&from_view=search&track=sph" target="_blank">kjpargeter</a></li>
-                        <li>Layout inspired by <a href="https://colorlib.com/wp/template/ronaldo/" target="_blank">Colorlib</a></li>
-                        <li>Material icons from <a href="https://material.io/" target="_blank">Google</a></li>
-                        <li>Testing and input from <a href="https://github.com/ItMeSarah/" target="_blank">ItMeSarah</a></li>
-                        <li>Input from <a href="https://github.com/qwerasd205" target="_blank">Qwerasd</a></li>
-                    </ul>
-                </div>
-            </div>
         </div>
-    </footer>
-    <script src="scripts.js"></script>
-</body>
-</html>
+    </div>
+</section>
+
+<section class="flex container column padded" id="projects">
+    <div class="flex container column heading animate-on-scroll fade-up">
+        <h2>Projects</h2>
+        <p>A small sample of my work. More can be found on my <a href="https://github.com/rauenzi" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+    </div>
+    <div class="flex flex-wrap">
+        {% for proj in collections.projects %}
+            <div class="flex flex-33 project animate-on-scroll fade-up">
+                <a href="{{proj.url}}" class="wrapper">
+                    <img src="{{proj.data.icon}}" class="icon" />
+                    <div class="info">
+                        <h3>{{proj.data.title}}</h3>
+                        <p>{{proj.data.blurb}}</p>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+<section class="flex container half-padded" id="contact">
+    <div class="flex flex-50 column heading animate-on-scroll fade-up">
+        <h2>Contact Me</h2>
+        <p>Feel free to contact me using this form!</p>
+        <img src="assets/images/contact.jpg" class="contact-avatar">
+        <p>You can also reach out on <a href="{{socials.LinkedIn}}" target="_blank">LinkedIn</a>.</p>
+    </div>
+    <form action="https://api.staticforms.xyz/submit" method="post" id="contactform" class="flex flex-50 column animate-on-scroll fade-up">
+        <input type="hidden" name="accessKey" value="ac71a6cb-698e-426a-9a75-55586ff530f1">
+        <input type="text" name="honeypot" id="honeypot">
+        <input class="text-input" type="text" name="name" placeholder="Your Name" required>
+        <input class="text-input" type="email" name="email" placeholder="Your Email" required>
+        <input class="text-input" type="text" name="subject" placeholder="Subject" required>
+        <textarea class="text-input" name="message" cols="20" rows="7" placeholder="Message" required></textarea>
+        <button class="btn btn-primary" type="Submit">Send Message</button>
+    </form>
+</section>
+<script src="/scripts.js"></script>

@@ -1,7 +1,24 @@
-{{repo}}
+{% extends "./split.njk" %}
 
-{% set something = github.projects | getElementByKey("full_name", repo) %}
 
-{{something}}
+{% block left %}
+    <section class="flex column project-markdown">
+        {{content | safe}}
+    </section>
+{% endblock %}
 
-{{content | safe}}
+{% set git = github.projects | getElementByKey("full_name", repo) %}
+
+{% block right %}
+    <section class="flex column project-sidebar">
+        <h2>Stats</h2>
+        <ul>
+            <li><a href="https://github.com/{{repo}}/blob/{{git.default_branch}}/LICENSE" target="_blank">{{git.license.name}}</a></li>
+            <li>Updated: <a href="https://github.com/{{repo}}/commits/" target="_blank">{{git.pushed_at | date}}</a></li>
+            <li>Stars: <a href="https://github.com/{{repo}}/stargazers/" target="_blank">{{git.stargazers_count}}</a></li>
+            <li>Watchers: <a href="https://github.com/{{repo}}/watchers/" target="_blank">{{git.watchers}}</a></li>
+            <li>Forks: <a href="https://github.com/{{repo}}/network/members/" target="_blank">{{git.forks}}</a></li>
+            <li>Issues: <a href="https://github.com/{{repo}}/issues/" target="_blank">{{git.open_issues}}</a></li>
+        </ul>
+    </section>
+{% endblock %}

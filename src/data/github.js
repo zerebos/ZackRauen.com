@@ -1,4 +1,4 @@
-const cachedFetch = require("@11ty/eleventy-cache-assets");
+const cachedFetch = require("@11ty/eleventy-fetch");
 const repos = require("./repos");
 
 module.exports = async function() {
@@ -6,7 +6,8 @@ module.exports = async function() {
     for (const repo of repos) {
         results.push(await cachedFetch(`https://api.github.com/repos/${repo.includes("/") ? repo : "rauenzi/" + repo}`, {
             duration: "1h", // 1 day
-            type: "json" // also supports "text" or "buffer"
+            type: "json", // also supports "text" or "buffer"
+            verbose: true
         }));
     }
 
