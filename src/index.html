@@ -25,7 +25,7 @@ layout: base.njk
                 </div>
             </div>
         </div>
-        <a class="btn btn-primary btn-fab" href="#about">
+        <a class="btn btn-primary btn-fab" href="#about" aria-label="Scroll Down!">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
         </a>
     </div>
@@ -33,7 +33,7 @@ layout: base.njk
 <section class="flex container half-padded" id="about">
     <div class="flex column">
         <div class="flex">
-            <div class="flex-50 animate-on-scroll fade-up"><img id="myuglymug" src="assets/images/self.png" /></div>
+            <div class="flex-50 animate-on-scroll fade-up"><img id="myuglymug" src="assets/images/myuglymug.webp" alt="Picture of me" /></div>
             <div class="flex-50 content-pad animate-on-scroll fade-up">
                 <div class="flex column">
                     <h2>About Me</h2>
@@ -50,7 +50,7 @@ layout: base.njk
         <div class="flex socials">
             {% for label, value in socials %}
                 <a href="{{value}}" class="{{label | lower}} animate-on-scroll fade-up" target="_blank" rel="noopener">
-                    <img src="assets/images/socials/{{label | lower}}_small.png" class="social-icon" alt="{{label}}" />
+                    <img src="assets/socials/{{label | lower}}_small.png" class="social-icon" alt="{{label}}" />
                 </a>
             {% endfor %}
         </div>
@@ -131,7 +131,7 @@ layout: base.njk
                             <div class="flex details">
                                 {% for subskill in skill.subskills %}
                                     <div class="flex-50">
-                                        <h4>{{subskill.value}}%</h4><span class="small text-gray">{{subskill.label}}</span>
+                                        <span class="subskill">{{subskill.value}}%</span><span class="small text-gray">{{subskill.label}}</span>
                                     </div>
                                 {% endfor %}
                             </div>
@@ -159,7 +159,7 @@ layout: base.njk
         {% for proj in collections.projects %}
             <div class="flex flex-33 project animate-on-scroll fade-up">
                 <a href="{{proj.url}}" class="wrapper">
-                    <img src="{{proj.data.icon}}" class="icon" />
+                    <img src="assets/projects/icons/{{proj.data.icon}}" class="icon" alt="{{proj.data.title}}" />
                     <div class="info">
                         <h3>{{proj.data.title}}</h3>
                         <p>{{proj.data.blurb}}</p>
@@ -173,7 +173,7 @@ layout: base.njk
     <div class="flex flex-50 column heading animate-on-scroll fade-up">
         <h2>Contact Me</h2>
         <p>Feel free to contact me using this form!</p>
-        <img src="assets/images/contact.jpg" class="contact-avatar">
+        <img src="assets/images/contact.jpg" class="contact-avatar" alt="Picture of me">
         <p>You can also reach out on <a href="{{socials.LinkedIn}}" target="_blank">LinkedIn</a>.</p>
     </div>
     <form action="https://api.staticforms.xyz/submit" method="post" id="contactform" class="flex flex-50 column animate-on-scroll fade-up">

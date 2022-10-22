@@ -1,9 +1,11 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Portfolio and landing page for Zack Rauen.">
 <title>Profile</title>
-<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body class="dark">
@@ -34,7 +36,7 @@
             <div class="flex socials">
                 {% for label, value in socials %}
                     <a href="{{value}}" class="{{label | lower}} animate-on-scroll fade-up" target="_blank" rel="noopener">
-                        <img src="/assets/images/socials/{{label | lower}}_small.png" class="social-icon" alt="{{label}}" />
+                        <img src="/assets/socials/{{label | lower}}_small.png" class="social-icon" alt="{{label}}" />
                     </a>
                 {% endfor %}
             </div>

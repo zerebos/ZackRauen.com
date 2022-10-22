@@ -381,14 +381,14 @@ button.expand {
 
 .fullscreen {
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 60px);
     position: inherit;
     background-size: cover;
     background-repeat: repeat-y;
     background-position: center center;
     display: block;
 
-    background: url("assets/images/lighthex.png") #202020;
+    background: url("assets/backgrounds/lighthex.webp") #202020;
 }
 
 @keyframes rainbow {
@@ -399,21 +399,6 @@ button.expand {
 	to {
 		filter: hue-rotate(360deg);
 	}
-}
-
-.banner::before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-size: cover;
-    background-repeat: repeat-y;
-    background-position: center center;
-    display: block;
-    background-image: url(assets/images/binary.svg);
-    animation: rainbow 5s linear infinite alternate;
-    animation-delay: 0;
-    z-index: -1;
 }
 
 .fullscreen .container {
@@ -543,7 +528,7 @@ button.expand {
     content: "";
     display: block;
     position: absolute;
-    background: url("assets/images/darkhex.png");
+    background: url("assets/backgrounds/darkhex.webp");
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -709,15 +694,15 @@ button.expand {
 }
 
 #education .resume-icon {
-    background-image: url(assets/images/icons/education.svg);
+    background-image: url(assets/icons/education.svg);
 }
 
 #experience .resume-icon {
-    background-image: url(assets/images/icons/experience.svg);
+    background-image: url(assets/icons/experience.svg);
 }
 
 #publications .resume-icon {
-    background-image: url(assets/images/icons/publication.svg);
+    background-image: url(assets/icons/publication.svg);
 }
 
 .resume-info h2 {
@@ -1150,7 +1135,8 @@ footer p {
     border-right: 1px solid rgba(255,255,255,0.1);
 }
 
-.tile .details h4 {
+.tile .details .subskill {
+    display: block;
     font-size: 1.5rem;
 }
 
