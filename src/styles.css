@@ -80,6 +80,12 @@ img {
     max-width: 100%;
 }
 
+ul {
+    list-style: disclosure-closed;
+    padding-left: 15px;
+    margin: 0;
+}
+
 .flex {
     display: flex;
     flex-wrap: wrap;
@@ -316,6 +322,7 @@ button.expand {
     background-color: var(--background-secondary);
     transition: box-shadow 200ms ease-in;
     box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
+    border-bottom: 1px solid black;
 }
 
 #main-nav:hover {
@@ -852,6 +859,7 @@ section.half-padded {
     padding: 5rem;
     gap: 12px;
     background: #202020;
+    border: 1px solid black;
 }
 
 .text-input {
@@ -891,11 +899,6 @@ footer .container {
     gap: 3.5em;
 }
 
-footer ul {
-    list-style: disclosure-closed;
-    padding-left: 15px;
-}
-
 footer .links ul {
     list-style: "# ";
 }
@@ -924,6 +927,7 @@ footer p {
 .project-sidebar,
 .project-markdown {
     width: 100%;
+    border: 1px solid black;
 }
 
 .project-markdown {
@@ -933,16 +937,61 @@ footer p {
     background: #202020;
 }
 
+.project-markdown h1 {
+    font-size: 3rem;
+}
+
+.project-markdown h2 {
+    font-size: 2.5rem;
+}
+
+.project-markdown h3 {
+    font-size: 2rem;
+}
+
+.project-markdown h4 {
+    font-size: 1.5rem;
+}
+
+.project-markdown h5 {
+    font-size: 1rem;
+}
+
+.project-markdown img {
+    border-radius: 10px;
+    border: 1px solid black;
+    align-self: center;
+}
+
+.project-markdown hr {
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: rgba(255,255,255,0.2);
+}
+
+.project-markdown pre {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.project-markdown h1,
+.project-markdown h2,
+.project-markdown h3,
+.project-markdown h4,
+.project-markdown h5 {
+    margin: 1rem 0;
+}
+
+.project-markdown h1 {
+    margin-top: 0;
+}
+
 .project-sidebar {
     display: flex;
     margin-bottom: 10px;
     background: #202020;
     padding: 3em;
-}
-
-.project-sidebar ul {
-    list-style: disclosure-closed;
-    padding-left: 15px;
 }
 
 

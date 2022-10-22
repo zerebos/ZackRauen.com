@@ -2,12 +2,12 @@
 
 {% block content %}
 <div class="flex container splitview">
-    <div class="flex flex-66 left">
+    <div class="flex flex-75 left">
         {% block left %}
             {{content | safe}}
         {% endblock %}
     </div>
-    <div class="flex flex-33 column right">
+    <div class="flex flex-25 column right">
         {% block right %}
             {{content | safe}}
         {% endblock %}

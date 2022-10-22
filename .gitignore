@@ -2,3 +2,5 @@ node_modules/
 dist/
 .cache/
 reference/
+cwebp.exe
+example.json

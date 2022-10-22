@@ -13,7 +13,7 @@
     <section class="flex column project-sidebar">
         <h2>Stats</h2>
         <ul>
-            <li><a href="https://github.com/{{repo}}/blob/{{git.default_branch}}/LICENSE" target="_blank">{{git.license.name}}</a></li>
+            {% if git.license.name %}<li><a href="https://github.com/{{repo}}/blob/{{git.default_branch}}/LICENSE" target="_blank">{{git.license.name}}</a></li>{% endif %}
             <li>Updated: <a href="https://github.com/{{repo}}/commits/" target="_blank">{{git.pushed_at | date}}</a></li>
             <li>Stars: <a href="https://github.com/{{repo}}/stargazers/" target="_blank">{{git.stargazers_count}}</a></li>
             <li>Watchers: <a href="https://github.com/{{repo}}/watchers/" target="_blank">{{git.watchers}}</a></li>
