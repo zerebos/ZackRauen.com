@@ -12,7 +12,7 @@
     <div class="sticky-wrap">
         <nav id="main-nav" class="collapse">
             <div class="container">
-                <span class="brand">ZackRauen</span>
+                <a href="/"><span class="brand">ZackRauen</span></a>
                 <button id="menuButton" class="expand left" aria-label="Menu">
                     <span class="rectangle"></span>
                     <span class="rectangle"></span>
@@ -40,7 +40,7 @@
                     </a>
                 {% endfor %}
             </div>
-            <div class="flex flex-space-evenly">
+            <div class="flex flex-space-evenly columns">
                 <div class="flex column links animate-on-scroll fade-up">
                     <h2>Links</h2>
                     <ul>
@@ -70,38 +70,6 @@
             </div>
         </div>
     </footer>
-    <script>
-        const isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
-        const scrollElements = document.querySelectorAll(".animate-on-scroll, .resume-entry");
-        const getViewportHeight = () => window.innerHeight || document.documentElement.clientHeight;
-        const elementInView = (el, dividend = 1) => {
-            const elementTop = el.getBoundingClientRect().top;
-            return elementTop <= getViewportHeight() / dividend;
-        };
-
-        const elementOutofView = (el) => {
-            const elementTop = el.getBoundingClientRect().top;
-            return elementTop > getViewportHeight();
-        };
-
-        const displayScrollElement = (element) => {
-            if (!isMobile) element.classList.add("animate");
-        };
-
-        const hideScrollElement = (element) => {
-            if (!isMobile) element.classList.remove("animate");
-        };
-
-        const handleScrollAnimation = () => {
-            scrollElements.forEach((el) => {
-                if (elementInView(el, 1.05)) displayScrollElement(el);
-                // else if (elementOutofView(el)) hideScrollElement(el);
-            })
-        }
-
-        window.addEventListener("scroll", () => { 
-            handleScrollAnimation();
-        });
-    </script>
+    <script src="/scripts.js"></script>
 </body>
 </html>
