@@ -1,9 +1,12 @@
+const dotenv = require("dotenv");
 const cachedFetch = require("@11ty/eleventy-fetch");
 const repos = require("./repos");
 
+dotenv.config();
+
 const fetchOptions = {
     headers: {
-        "Authorization": require("../../config").GITHUB_TOKEN
+        "Authorization": process.env.GITHUB_TOKEN
     }
 };
 
