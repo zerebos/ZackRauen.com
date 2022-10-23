@@ -34,8 +34,8 @@ layout: base.njk
 <section class="flex container half-padded" id="about">
     <div class="flex column">
         <div class="flex">
-            <div class="flex-50 animate-on-scroll fade-up"><img id="myuglymug" src="assets/images/myuglymug.webp" alt="Picture of me" /></div>
-            <div class="flex-50 content-pad animate-on-scroll fade-up">
+            <div class="flex flex-50 animate-on-scroll fade-up"><img id="myuglymug" src="assets/images/myuglymug.webp" alt="Picture of me" /></div>
+            <div class="flex column flex-50 content-pad animate-on-scroll fade-up">
                 <div class="flex column">
                     <h2>About Me</h2>
                     <p>{{about.blurb}}</p>
@@ -45,7 +45,7 @@ layout: base.njk
                         {% endfor %}
                     </ul>
                 </div>
-                <a href="assets/resume.pdf" class="btn btn-primary" style="margin-top: 12px;" download>Download CV</a>
+                <a href="assets/resume.pdf" class="btn btn-primary" download>Download CV</a>
             </div>
         </div>
         <div class="flex socials">
@@ -180,10 +180,14 @@ layout: base.njk
     <form action="https://api.staticforms.xyz/submit" method="post" id="contactform" class="flex flex-50 column animate-on-scroll fade-up">
         <input type="hidden" name="accessKey" value="ac71a6cb-698e-426a-9a75-55586ff530f1">
         <input type="text" name="honeypot" id="honeypot">
-        <input class="text-input" type="text" name="name" placeholder="Your Name" required>
-        <input class="text-input" type="email" name="email" placeholder="Your Email" required>
-        <input class="text-input" type="text" name="subject" placeholder="Subject" required>
-        <textarea class="text-input" name="message" cols="20" rows="7" placeholder="Message" required></textarea>
+        <label for="name">Name</label>
+        <input class="text-input" type="text" name="name" placeholder="John Smith" required>
+        <label for="email">Email</label>
+        <input class="text-input" type="email" name="email" placeholder="jsmith@bigcompany.com" required>
+        <label for="subject">Subject</label>
+        <input class="text-input" type="text" name="subject" placeholder="I want to hire you!" required>
+        <label for="message">Message</label>
+        <textarea class="text-input" name="message" cols="20" rows="7" placeholder="I have a great job opportunity for you..." required></textarea>
         <button class="btn btn-primary" type="Submit">Send Message</button>
     </form>
 </section>

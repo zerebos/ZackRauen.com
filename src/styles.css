@@ -471,6 +471,20 @@ button.expand {
     letter-spacing: 4px;
 }
 
+@media only screen and (max-width:500px) {
+    .fullscreen h1 {
+        font-size: 3rem;
+    }
+    
+    .fullscreen h2 {
+        font-size: 1.5rem;
+    }
+    
+    .fullscreen h3 {
+        font-size: 16px;
+    }
+}
+
 #jobtitle {
     border-bottom: 5px solid var(--accent-color);
     /* border-right: .15em solid gray; */
@@ -581,6 +595,12 @@ button.expand {
     clip-path: polygon(50% 0, 93.333% 25%, 93.333% 75%, 50% 100%, 6.666% 75%, 6.666% 25%);
 }
 
+@media only screen and (max-width:500px) {
+    #about .content-pad {
+        padding: 1rem;
+    }
+}
+
 .about-info {
     display: inline-block;
     padding: 0;
@@ -597,7 +617,11 @@ button.expand {
 .about-info li .label {
     font-weight: 600;
     color: var(--accent-color);
-    width: 130px;
+    min-width: 130px;
+}
+
+#about .btn {
+    margin-top: 12px;
 }
 
 .socials {
@@ -764,6 +788,17 @@ button.expand {
     padding-left: 1rem;
 }
 
+@media only screen and (max-width:768px) {
+    #resume .resume-icon {
+        display: none;
+    }
+
+    #resume .resume-info {
+        width: 100%;
+        padding-left: 0;
+    }
+}
+
 .resume-entry .date {
     font-weight: 700;
     font-size: 16px;
@@ -904,6 +939,16 @@ section.half-padded {
     border: 1px solid black;
 }
 
+@media only screen and (max-width:768px) {
+    #contactform {
+        padding: 2rem;
+    }
+}
+
+#contactform label {
+    margin-bottom: -10px;
+}
+
 .text-input {
     height: 52px;
     background: var(--background-main);
@@ -915,10 +960,11 @@ section.half-padded {
     border: 1px solid #000;
     transition: border-color 0.15s ease-in-out;
     font-family: inherit;
+    max-width: 100%;
 }
 
 .text-input::placeholder {
-    color: #fff;
+    /* color: #fff; */
 }
 
 .text-input:focus {
@@ -992,15 +1038,22 @@ footer p {
     width: 100%;
     border: 1px solid black;
     background: #202020;
+    padding: 3rem;
     /* box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
 	margin-bottom: 40px;
 	background: var(--background-secondary); */
 }
 
+@media only screen and (max-width:768px) {
+    .project-sidebar,
+    .project-markdown {
+        padding: 1rem;
+    }
+}
+
 .project-markdown {
     display: flex;
     flex-direction: column;
-    padding: 3em;
     /* background: #202020; */
 }
 
@@ -1022,6 +1075,28 @@ footer p {
 
 .project-markdown h5 {
     font-size: 1rem;
+}
+
+@media only screen and (max-width:500px) {
+    .project-markdown h1 {
+        font-size: 2.5rem;
+    }
+    
+    .project-markdown h2 {
+        font-size: 2rem;
+    }
+    
+    .project-markdown h3 {
+        font-size: 1.5rem;
+    }
+    
+    .project-markdown h4 {
+        font-size: 1rem;
+    }
+    
+    .project-markdown h5 {
+        font-size: 0.5rem;
+    }
 }
 
 .project-markdown img {
@@ -1052,6 +1127,7 @@ footer p {
 .project-markdown h4,
 .project-markdown h5 {
     margin: 1rem 0;
+    max-width: 100%;
 }
 
 .project-markdown h1 {
@@ -1062,7 +1138,6 @@ footer p {
     display: flex;
     margin-bottom: 10px;
     /* background: #202020; */
-    padding: 3em;
 }
 
 .call-to-action {
