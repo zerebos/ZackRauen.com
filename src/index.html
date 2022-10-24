@@ -179,9 +179,12 @@ layout: base.njk
     </div>
     <form action="https://api.staticforms.xyz/submit" method="post" id="contactform" class="flex flex-50 column animate-on-scroll fade-up">
         <input type="hidden" name="accessKey" value="ac71a6cb-698e-426a-9a75-55586ff530f1">
-        <input type="text" name="honeypot" id="honeypot">
+        <!-- <label for="honeypot">Phone Number</label>
+        <input type="text" name="honeypot" id="honeypot"> -->
         <label for="name">Name</label>
         <input class="text-input" type="text" name="name" placeholder="John Smith" required>
+        <label for="company">Company</label>
+        <input type="text" name="company" id="company">
         <label for="email">Email</label>
         <input class="text-input" type="email" name="email" placeholder="jsmith@bigcompany.com" required>
         <label for="subject">Subject</label>
@@ -237,6 +240,56 @@ layout: base.njk
             nextTitle = getNextTitle(jobTitle.textContent);
             await removeJobTitle();
             await new Promise(r => setTimeout(r, 750));
+        }
+    });
+</script>
+<script>
+    /** @type {HTMLFormElement} */
+    const contactForm = document.getElementById("contactform");
+    contactForm.addEventListener("submit", async event => {
+        event.preventDefault();
+        try {
+            const payload = {
+                accessKey: "ac71a6cb-698e-426a-9a75-55586ff530f1",
+                name: contactForm.elements.namedItem("name").value,
+                email: contactForm.elements.namedItem("email").value,
+                subject: contactForm.elements.namedItem("subject").value,
+                honeypot: contactForm.elements.namedItem("company").value,
+                message: contactForm.elements.namedItem("message").value,
+                replyTo: "@"
+            };
+            
+            const result = await fetch(contactForm.action, {
+                method: "POST",
+                body: JSON.stringify(payload),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            
+            const json = await result.json();
+            const submitButton = contactForm.querySelector("button");
+            if (json.success) {
+                contactForm.reset();
+                submitButton.classList.replace("btn-primary", "btn-success");
+                submitButton.textContent = "Message Sent!";
+            }
+            else {
+                submitButton.classList.replace("btn-primary", "btn-danger");
+                submitButton.textContent = "Could Not Send!";
+                submitButton.disabled = true;
+            }
+            setTimeout(() => {
+                submitButton.classList.replace(json.success ? "btn-success" : "btn-danger", "btn-primary");
+                submitButton.textContent = "Send Message!";
+                submitButton.disabled = false;
+            }, 5000);
+        }
+        catch (error) {
+            const submitButton = contactForm.querySelector("button");
+            submitButton.classList.replace("btn-primary", "btn-danger");
+            submitButton.textContent = "Something Went Wrong!";
+            submitButton.disabled = true;
         }
     });
 </script>
