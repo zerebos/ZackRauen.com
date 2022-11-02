@@ -178,13 +178,10 @@ layout: base.njk
         <p>You can also reach out on <a href="{{socials.LinkedIn}}" target="_blank">LinkedIn</a>.</p>
     </div>
     <form action="https://api.staticforms.xyz/submit" method="post" id="contactform" class="flex flex-50 column animate-on-scroll fade-up">
-        <input type="hidden" name="accessKey" value="ac71a6cb-698e-426a-9a75-55586ff530f1">
-        <label for="honeypot">Phone Number</label>
-        <input type="text" name="honeypot" id="honeypot">
         <label for="name">Name</label>
         <input class="text-input" type="text" name="name" placeholder="John Smith" required>
-        <label for="company">Company</label>
-        <input type="text" name="company" id="company">
+        <label for="filter" id="captcha-wrap">Spam Filter <canvas id="captcha"></canvas></label>
+        <input class="text-input" type="text" name="filter" placeholder="Spam Filter" required>
         <label for="email">Email</label>
         <input class="text-input" type="email" name="email" placeholder="jsmith@bigcompany.com" required>
         <label for="subject">Subject</label>
@@ -244,17 +241,54 @@ layout: base.njk
     });
 </script>
 <script>
+    let captchaCode;
+    const CAPTCHA_LENGTH = 6;
+    const captchaChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    function createCaptcha() {
+        const captcha = [];
+        for (var i = 0; i < CAPTCHA_LENGTH; i++) {
+            const index = Math.floor(Math.random() * captchaChars.length + 1); // Get the next character from the array
+            if (captcha.indexOf(captchaChars[index]) == -1) captcha.push(captchaChars[index]);
+            else i--;
+        }
+        const canv = document.getElementById("captcha");
+        canv.width = 100;
+        canv.height = 28.8;
+        const ctx = canv.getContext("2d");
+        ctx.font = "20px Georgia, serif";
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillText(captcha.join(""), 0, 20);
+        captchaCode = captcha.join("");
+    }
+
     /** @type {HTMLFormElement} */
     const contactForm = document.getElementById("contactform");
+    const submitButton = contactForm.querySelector("button");
     contactForm.addEventListener("submit", async event => {
         event.preventDefault();
+
+        const submittedCode = contactForm.elements.namedItem("filter").value;
+        if (submittedCode !== captchaCode){
+            submitButton.classList.replace("btn-primary", "btn-danger");
+            submitButton.textContent = "Incorrect Captcha!";
+            submitButton.disabled = true;
+
+            setTimeout(() => {
+                createCaptcha();
+                submitButton.classList.replace("btn-danger", "btn-primary");
+                submitButton.textContent = "Send Message!";
+                submitButton.disabled = false;
+            }, 3000);
+
+            return;
+        }
+
         try {
             const payload = {
                 accessKey: "ac71a6cb-698e-426a-9a75-55586ff530f1",
                 name: contactForm.elements.namedItem("name").value,
                 email: contactForm.elements.namedItem("email").value,
                 subject: contactForm.elements.namedItem("subject").value,
-                honeypot: contactForm.elements.namedItem("company").value,
                 message: contactForm.elements.namedItem("message").value,
                 replyTo: "@"
             };
@@ -268,7 +302,6 @@ layout: base.njk
             });
             
             const json = await result.json();
-            const submitButton = contactForm.querySelector("button");
             if (json.success) {
                 contactForm.reset();
                 submitButton.classList.replace("btn-primary", "btn-success");
@@ -286,10 +319,13 @@ layout: base.njk
             }, 5000);
         }
         catch (error) {
-            const submitButton = contactForm.querySelector("button");
             submitButton.classList.replace("btn-primary", "btn-danger");
             submitButton.textContent = "Something Went Wrong!";
             submitButton.disabled = true;
+            console.error(error);
         }
     });
+
+    createCaptcha();
+
 </script>

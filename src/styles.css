@@ -977,6 +977,16 @@ textarea.text-input {
     height: inherit;
 }
 
+#captcha-wrap {
+    display: flex;
+    gap: 20px;
+}
+
+#captcha {
+    pointer-events: none;
+    height: 28.8px;
+}
+
 
 
 
