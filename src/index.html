@@ -193,7 +193,7 @@ layout: base.njk
 </section>
 
 <script>
-    const vowels = ["a", "e", "i", "o", "u"]
+    const vowels = ["a", "e", "i", "o", "u"];
     async function addJobTitle(title) {
         const jobTitle = document.querySelector("#jobtitle");
         for (let i = 0; i < title.length; i++) {
@@ -212,12 +212,12 @@ layout: base.njk
     }
 
 
-    let validTitles = ["Engineer", "Developer", "Thinker", "Creator", "Designer", "Researcher", "Educator"].map(t => vowels.includes(t[0].toLowerCase()) ? `an ${t}` : `a ${t}`)
+    let validTitles = ["Engineer", "Developer", "Thinker", "Creator", "Designer", "Researcher", "Educator"].map(t => vowels.includes(t[0].toLowerCase()) ? `an ${t}` : `a ${t}`);
     function getNextTitle(currentTitle) {
-        let currentIndex = validTitles.indexOf(currentTitle);
+        const currentIndex = validTitles.indexOf(currentTitle);
         let nextIndex = currentIndex + 1;
         if (nextIndex >= validTitles.length) {
-            nextIndex = 0
+            nextIndex = 0;
             validTitles = validTitles.sort(() => Math.random() - 0.5);
         }
 
@@ -246,7 +246,7 @@ layout: base.njk
     const captchaChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     function createCaptcha() {
         const captcha = [];
-        for (var i = 0; i < CAPTCHA_LENGTH; i++) {
+        for (let i = 0; i < CAPTCHA_LENGTH; i++) {
             const index = Math.floor(Math.random() * captchaChars.length + 1); // Get the next character from the array
             if (captcha.indexOf(captchaChars[index]) == -1) captcha.push(captchaChars[index]);
             else i--;
@@ -268,7 +268,7 @@ layout: base.njk
         event.preventDefault();
 
         const submittedCode = contactForm.elements.namedItem("filter").value;
-        if (submittedCode !== captchaCode){
+        if (submittedCode !== captchaCode) {
             submitButton.classList.replace("btn-primary", "btn-danger");
             submitButton.textContent = "Incorrect Captcha!";
             submitButton.disabled = true;
@@ -318,11 +318,11 @@ layout: base.njk
                 submitButton.disabled = false;
             }, 5000);
         }
-        catch (error) {
+        catch {
             submitButton.classList.replace("btn-primary", "btn-danger");
             submitButton.textContent = "Something Went Wrong!";
             submitButton.disabled = true;
-            console.error(error);
+            // console.error(error);
         }
     });
 

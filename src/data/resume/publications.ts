@@ -1,4 +1,4 @@
-module.exports = [
+export default [
     {
         date: "October 2018",
         journal: "IEEE MobiWac",

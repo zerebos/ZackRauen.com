@@ -1,4 +1,4 @@
-module.exports = [
+export default [
     "BetterDiscordAddons",
     "EnhancedDiscordPlugins",
     "BDPluginLibrary",

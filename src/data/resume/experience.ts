@@ -1,4 +1,4 @@
-module.exports = [
+export default [
     {
         start: "Nov 2021",
         end: "present",

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     blurb: "Computer Engineer, with an innovative mind and drive, looking to change the world.",
     fields: {
         Name: "Zack Rauen",

@@ -1,16 +1,17 @@
-const dotenv = require("dotenv");
-const cachedFetch = require("@11ty/eleventy-fetch");
-const repos = require("./repos");
+import dotenv from "dotenv";
+// @ts-expect-error - no types for this package
+import cachedFetch from "@11ty/eleventy-fetch";
+import repos from "./repos";
 
 dotenv.config();
 
 const fetchOptions = {
     headers: {
-        "Authorization": process.env.GITHUB_TOKEN
+        Authorization: process.env.GITHUB_TOKEN
     }
 };
 
-module.exports = async function () {
+export default async function () {
     const repoResults = [];
     for (const repo of repos) {
         repoResults.push(await cachedFetch(`https://api.github.com/repos/${repo.includes("/") ? repo : "zerebos/" + repo}`, {
@@ -21,7 +22,7 @@ module.exports = async function () {
         }));
     }
 
-    const langResults = {};
+    const langResults: Record<string, Record<string, number>> = {};
     for (const repo of repos) {
         const fullName = repo.includes("/") ? repo : "zerebos/" + repo;
         try {
@@ -30,11 +31,11 @@ module.exports = async function () {
                 type: "json", // also supports "text" or "buffer"
                 verbose: true,
                 fetchOptions: fetchOptions
-            });
+            }) as Record<string, number>;
             const current = Object.assign({}, temp);
             // console.log(current);
 
-            const sum = Object.values(current).reduce((prev, current) => prev + current, 0);
+            const sum = Object.values(current).reduce((prev, curr) => prev + curr, 0);
             for (const lang in current) {
                 const portion = current[lang];
                 const decimal = portion / sum;
@@ -45,10 +46,13 @@ module.exports = async function () {
             langResults[fullName] = current;
             // console.log(current);
             // console.log("")
-        } catch {}
+        }
+        catch {
+            // do nothing
+        }
     }
 
-    const branchResults = {};
+    const branchResults: Record<string, string[]> = {};
     for (const repo of repos) {
         const fullName = repo.includes("/") ? repo : "zerebos/" + repo;
         try {
@@ -57,10 +61,13 @@ module.exports = async function () {
                 type: "json", // also supports "text" or "buffer"
                 verbose: true,
                 fetchOptions: fetchOptions
-            });
+            }) as Array<{name: string;}>;
 
             branchResults[fullName] = current.map(b => b.name);
-        } catch {}
+        }
+        catch {
+            // do nothing
+        }
     }
 
     return {
@@ -72,4 +79,4 @@ module.exports = async function () {
         issues: repoResults.reduce((prev, current) => prev + current.open_issues_count, 0),
         projects: repoResults
     };
-};
+}
