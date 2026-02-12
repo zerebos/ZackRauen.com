@@ -43,5 +43,5 @@ module.exports = function (eleventyConfig) {
             data: "data",
             layouts: "layouts"
         }
-    }
+    };
 };

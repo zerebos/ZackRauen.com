@@ -33,10 +33,10 @@ const handleScrollAnimation = () => {
     scrollElements.forEach((el) => {
         if (elementInView(el, 1.05)) displayScrollElement(el);
         // else if (elementOutofView(el)) hideScrollElement(el);
-    })
-}
+    });
+};
 
-window.addEventListener("scroll", () => { 
+window.addEventListener("scroll", () => {
     handleScrollAnimation();
 });
 

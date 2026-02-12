@@ -22,7 +22,7 @@ You can play a demo of the game at [http://zerebos.github.io/BlockCatcher/](http
 
 	Move Player Bar Left/Right - Left/Right Arrow Keys
 	Start Game - SPACE
-		
+
 	Red Blocks - 1 points
 	Blue Blocks - 5 points
 	White Blocks - 25 points

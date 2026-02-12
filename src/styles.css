@@ -13,7 +13,7 @@
 }
 
 body.dark {
-    
+
     --text-heading: #fff;
     --text-primary: #ccc;
     --background-main: #2A2A2A;
@@ -475,11 +475,11 @@ button.expand {
     .fullscreen h1 {
         font-size: 3rem;
     }
-    
+
     .fullscreen h2 {
         font-size: 1.5rem;
     }
-    
+
     .fullscreen h3 {
         font-size: 16px;
     }
@@ -640,7 +640,7 @@ button.expand {
     align-items: center;
     overflow: visible;
 }
-/* 
+/*
 .socials a.facebook {
     background-color: #3C5B9B;
 }
@@ -1093,19 +1093,19 @@ footer p {
     .project-markdown h1 {
         font-size: 2.5rem;
     }
-    
+
     .project-markdown h2 {
         font-size: 2rem;
     }
-    
+
     .project-markdown h3 {
         font-size: 1.5rem;
     }
-    
+
     .project-markdown h4 {
         font-size: 1rem;
     }
-    
+
     .project-markdown h5 {
         font-size: 0.5rem;
     }
@@ -1355,7 +1355,7 @@ ul.stats {
     animation-name: percent-50;
     stroke-dashoffset: 128;
 }
-  
+
 @keyframes percent-50 {
     from {
         stroke-dashoffset: 255;
@@ -1365,7 +1365,7 @@ ul.stats {
 .percent-75 .fill {
     animation-name: percent-75;
 }
-  
+
 @keyframes percent-75 {
     to {
         stroke-dashoffset: 64;
@@ -1375,7 +1375,7 @@ ul.stats {
 .percent-100 .fill {
     animation-name: percent-100;
 }
-  
+
 @keyframes percent-100 {
     to {
         stroke-dashoffset: 0;
@@ -1599,7 +1599,7 @@ ul.stats {
 @keyframes floating {
     from { transform: translate(0,  0px); }
     65%  { transform: translate(0, 30px); }
-    to   { transform: translate(0, -0px); }    
+    to   { transform: translate(0, -0px); }
 }
 
 @keyframes fall-off {

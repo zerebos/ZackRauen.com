@@ -41,4 +41,4 @@ module.exports = {
         {label: "Bash", value: 65},
         {label: "HTML/CSS", value: 95},
     ]
-}
+};

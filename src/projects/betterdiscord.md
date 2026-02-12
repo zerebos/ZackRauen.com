@@ -19,7 +19,7 @@ BetterDiscord is a client modification for Discord. This allows you to add plugi
  - Article on MakeUseOf by Nico Posateri - [How to Set Up and Use BetterDiscord](https://www.makeuseof.com/how-to-set-up-use-betterdiscord/)
  - Article on OnlineTechTips by Emma Collins - [What Is BetterDiscord?](https://www.online-tech-tips.com/software-reviews/what-is-betterdiscord-and-how-to-install-it/)
 
- 
+
 ## BetterDiscord Architecture
 
 BetterDiscord is currently broken up into three packages--the local injector, the preload, and the renderer application. They form this miniature monorepo that is managed by [`pnpm`](https://pnpm.io/).

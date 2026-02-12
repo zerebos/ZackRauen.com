@@ -10,7 +10,7 @@ const fetchOptions = {
     }
 };
 
-module.exports = async function() {
+module.exports = async function () {
     const repoResults = [];
     for (const repo of repos) {
         repoResults.push(await cachedFetch(`https://api.github.com/repos/${repo.includes("/") ? repo : "zerebos/" + repo}`, {

@@ -65,10 +65,10 @@ if (canvas) {
             // context.strokeStyle = this.fillColor;
             // context.moveTo(ls.x, ls.y);
             // context.lineTo(this.x, this.y);
-            
+
             // context.filter = `hue-rotate(${Math.round(percent * 360)}deg)`;
             // if (this.special) console.log(Math.round(percent * 360))
-            
+
             // context.stroke();
             // const percent = (this.y + this.fontSize) / canvas.clientHeight;
             // if (this.special) console.log(percent < 0.5 ? (-2 * percent) + 1 : (2 * percent) - 1)
@@ -91,7 +91,7 @@ if (canvas) {
                 this.special = true;
                 huh = true;
             }
-        }
+        };
 
         this.randomize();
     }
@@ -106,7 +106,7 @@ if (canvas) {
 
     // generateParticles(300);
     setSize();
-    
+
     // window.rainbow = true;
     // window.doAnimation = false;
     const MAX_NUM = 150;
@@ -126,42 +126,42 @@ if (canvas) {
 
 
     // hueRotate will create a colorMatrix with the hue rotation applied to it
-// taken from https://pixijs.github.io/docs/filters_colormatrix_ColorMatrixFilter.js.html
-// and therefore from https://stackoverflow.com/questions/8507885/shift-hue-of-an-rgb-color/8510751#8510751
-// function hueRotate(rotation) {
-//     rotation = (rotation || 0) / 180 * Math.PI;
-//     var cosR = Math.cos(rotation),
-//       sinR = Math.sin(rotation),
-//       sqrt = Math.sqrt;
-  
-//     var w = 1 / 3,
-//       sqrW = sqrt(w);
-//     var a00 = cosR + (1.0 - cosR) * w;
-//     var a01 = w * (1.0 - cosR) - sqrW * sinR;
-//     var a02 = w * (1.0 - cosR) + sqrW * sinR;
-//     var a10 = w * (1.0 - cosR) + sqrW * sinR;
-//     var a11 = cosR + w * (1.0 - cosR);
-//     var a12 = w * (1.0 - cosR) - sqrW * sinR;
-//     var a20 = w * (1.0 - cosR) - sqrW * sinR;
-//     var a21 = w * (1.0 - cosR) + sqrW * sinR;
-//     var a22 = cosR + w * (1.0 - cosR);
-//     var matrix = [
-//       a00, a01, a02, 0, 0,
-//       a10, a11, a12, 0, 0,
-//       a20, a21, a22, 0, 0,
-//       0, 0, 0, 1, 0,
-//     ];
-//     return matrix;
-//   }
+    // taken from https://pixijs.github.io/docs/filters_colormatrix_ColorMatrixFilter.js.html
+    // and therefore from https://stackoverflow.com/questions/8507885/shift-hue-of-an-rgb-color/8510751#8510751
+    // function hueRotate(rotation) {
+    //     rotation = (rotation || 0) / 180 * Math.PI;
+    //     var cosR = Math.cos(rotation),
+    //       sinR = Math.sin(rotation),
+    //       sqrt = Math.sqrt;
+
+    //     var w = 1 / 3,
+    //       sqrW = sqrt(w);
+    //     var a00 = cosR + (1.0 - cosR) * w;
+    //     var a01 = w * (1.0 - cosR) - sqrW * sinR;
+    //     var a02 = w * (1.0 - cosR) + sqrW * sinR;
+    //     var a10 = w * (1.0 - cosR) + sqrW * sinR;
+    //     var a11 = cosR + w * (1.0 - cosR);
+    //     var a12 = w * (1.0 - cosR) - sqrW * sinR;
+    //     var a20 = w * (1.0 - cosR) - sqrW * sinR;
+    //     var a21 = w * (1.0 - cosR) + sqrW * sinR;
+    //     var a22 = cosR + w * (1.0 - cosR);
+    //     var matrix = [
+    //       a00, a01, a02, 0, 0,
+    //       a10, a11, a12, 0, 0,
+    //       a20, a21, a22, 0, 0,
+    //       0, 0, 0, 1, 0,
+    //     ];
+    //     return matrix;
+    //   }
     function mmultiply(m, vector) {
         const R = vector[0];
         const G = vector[1];
         const B = vector[2];
         const A = vector[3];
-        const red = (m[0] * R) +(m[1] * G) + (m[2] * B) + (m[3] * A) + (m[4]);
-        const green = (m[5] * R) +(m[6] * G) + (m[7] * B) + (m[8] * A) + (m[9]);
-        const blue = (m[10] * R) +(m[11] * G) + (m[12] * B) + (m[13] * A) + (m[14]);
-        const alpha = (m[15] * R) +(m[16] * G) + (m[17] * B) + (m[18] * A) + (m[19]);
+        const red = (m[0] * R) + (m[1] * G) + (m[2] * B) + (m[3] * A) + (m[4]);
+        const green = (m[5] * R) + (m[6] * G) + (m[7] * B) + (m[8] * A) + (m[9]);
+        const blue = (m[10] * R) + (m[11] * G) + (m[12] * B) + (m[13] * A) + (m[14]);
+        const alpha = (m[15] * R) + (m[16] * G) + (m[17] * B) + (m[18] * A) + (m[19]);
         // return [red, green, blue, alpha];
         return [Math.round(red), Math.round(green), Math.round(blue), Math.round(alpha)];
     }
@@ -176,9 +176,9 @@ if (canvas) {
         const R = rgb[0];
         const G = rgb[1];
         const B = rgb[2];
-        const red = ((0.299 + 0.701*vsu + 0.168*vsw) * R) + ((0.587 - 0.587*vsu + 0.330*vsw) * G) + ((0.114 - 0.114*vsu - 0.497*vsw) * B);
-        const green = ((0.299 - 0.299*vsu - 0.328*vsw) * R) + ((0.587 + 0.413*vsu + 0.035*vsw) * G) + ((0.114 - 0.114*vsu + 0.292*vsw) * B);
-        const blue = ((0.299 - 0.300*vsu + 1.25*vsw) * R) - ((0.587 - 0.588*vsu - 1.05*vsw) * G) + ((0.114 + 0.886*vsu - 0.203*vsw) * B);
+        const red = ((0.299 + 0.701 * vsu + 0.168 * vsw) * R) + ((0.587 - 0.587 * vsu + 0.330 * vsw) * G) + ((0.114 - 0.114 * vsu - 0.497 * vsw) * B);
+        const green = ((0.299 - 0.299 * vsu - 0.328 * vsw) * R) + ((0.587 + 0.413 * vsu + 0.035 * vsw) * G) + ((0.114 - 0.114 * vsu + 0.292 * vsw) * B);
+        const blue = ((0.299 - 0.300 * vsu + 1.25 * vsw) * R) - ((0.587 - 0.588 * vsu - 1.05 * vsw) * G) + ((0.114 + 0.886 * vsu - 0.203 * vsw) * B);
         return [clamp(red), clamp(green), clamp(blue)];
     }
     function hueRotate(rotation) {
@@ -225,37 +225,37 @@ if (canvas) {
     window.transformHSV = transformHSV;
     window.mmultiply = mmultiply;
     window.hueRotate = hueRotate;
-  
-  function rgbToHsl(arr) {
-    var r = arr[0] / 255,
-      g = arr[1] / 255,
-      b = arr[2] / 255;
-    var max = Math.max(r, g, b),
-      min = Math.min(r, g, b);
-    var h, s, l = (max + min) / 2;
-  
-    if (max == min) {
-      h = s = 0;
-    } else {
-      var d = max - min;
-      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-      switch (max) {
-        case r:
-          h = (g - b) / d + (g < b ? 6 : 0);
-          break;
-        case g:
-          h = (b - r) / d + 2;
-          break;
-        case b:
-          h = (r - g) / d + 4;
-          break;
-      }
-      h /= 6;
+
+    function rgbToHsl(arr) {
+        var r = arr[0] / 255,
+            g = arr[1] / 255,
+            b = arr[2] / 255;
+        var max = Math.max(r, g, b),
+            min = Math.min(r, g, b);
+        var h, s, l = (max + min) / 2;
+
+        if (max == min) {
+            h = s = 0;
+        } else {
+            var d = max - min;
+            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+            switch (max) {
+                case r:
+                    h = (g - b) / d + (g < b ? 6 : 0);
+                    break;
+                case g:
+                    h = (b - r) / d + 2;
+                    break;
+                case b:
+                    h = (r - g) / d + 4;
+                    break;
+            }
+            h /= 6;
+        }
+        return [
+            Math.round(h * 360),
+            Math.round(s * 100),
+            Math.round(l * 100)
+        ];
     }
-    return [
-      Math.round(h * 360),
-      Math.round(s * 100),
-      Math.round(l * 100)
-    ];
-  }
 }
