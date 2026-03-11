@@ -5,3 +5,9 @@ dist/
 reference/
 cwebp.exe
 example.json
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example

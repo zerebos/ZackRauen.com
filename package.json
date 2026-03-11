@@ -8,7 +8,10 @@
     "build": "bunx --bun eleventy --config=eleventy.config.ts",
     "serve": "bunx --bun eleventy --config=eleventy.config.ts --serve --port 6767",
     "dev": "bun run serve",
-    "debug": "set DEBUG=Eleventy* & bun run build"
+    "debug": "set DEBUG=Eleventy* & bun run build",
+    "wrangler": "wrangler",
+    "deploy": "bun run build && wrangler deploy",
+    "preview": "bun run build && wrangler dev"
   },
   "author": "",
   "license": "",
@@ -19,6 +22,7 @@
     "@zerebos/eslint-config": "^1.0.1",
     "@zerebos/eslint-config-typescript": "^1.0.1",
     "dotenv": "^17.2.4",
-    "eslint": "^10.0.0"
+    "eslint": "^10.0.0",
+    "wrangler": "^4.72.0"
   }
 }
