@@ -1,5 +1,11 @@
 export default [
     {
+        date: "2018",
+        journal: "Wallace H. Coulter School of Engineering",
+        authors: "Zachary I Rauen",
+        title: "Improving the role of Human-Computer Interaction in Continuous User Verification in Smartphone Sensing.",
+    },
+    {
         date: "October 2018",
         journal: "IEEE MobiWac",
         authors: "Zachary I Rauen, Fazel Anjomshoa, Burak Kantarci",
@@ -28,11 +34,5 @@ export default [
         journal: "IEEE Frontiers in Education Conference",
         authors: "Zachary I Rauen, Burak Kantarci, Mahesh Banavar, Nick Rolfe, Will Freitag",
         title: "A Tool for Simulation and Visualization of Distributed Estimation in Wireless Sensor Networks.",
-    },
-    {
-        date: "August 2014",
-        journal: "CNS Division of Computer and Network Systems",
-        authors: "Zachary I Rauen, Adam Scott, Jacob Melite, Andrew Hou",
-        title: "Long-term Active User Authentication Using Multi-modal Profiles.",
     },
 ];

@@ -1,7 +1,7 @@
 export default [
     {
         start: "Nov 2021",
-        end: "present",
+        end: "Present",
         title: "Firmware Recovery Lead Engineer",
         company: "IBM",
         blurb: "Collaborated and coordinated built-in recovery systems for IBM System Z mainframes as the lead of sysplex recovery. Used my breadth of knowledge to guide other teams towards recovery safe practices."
