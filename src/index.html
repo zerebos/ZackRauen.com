@@ -63,57 +63,64 @@ layout: base.njk
         <nav id="resume-nav">
             <ul>
                 <li><a href="#experience">Experience</a></li>
+                <li><a href="#resume-projects">Projects</a></li>
+                <li><a href="#skills">Technical Skills</a></li>
                 <li><a href="#education">Education</a></li>
+                <li><a href="#awards">Awards</a></li>
                 <li><a href="#publications">Publications</a></li>
-                <li><a href="#skills">Skills</a></li>
             </ul>
         </nav>
     </div>
     <div class="flex-75">
         <div id="experience" class="resume-section">
-            <h2 class="heading animate-on-scroll fade-up">Experience</h2>
+            <h2 class="heading animate-on-scroll fade-up">Professional Experience</h2>
             {% for exp in resume.experience %}
                 <div class="resume-entry">
                     <div class="resume-icon experience"></div>
                     <div class="resume-info">
                         <span class="date">{{exp.start}} - {{exp.end}}</span>
-                        <h2>{{exp.title}}</h2>
-                        <span class="company">{{exp.company}}</span>
-                        <p>{{exp.blurb}}</p>
+                        <h2>{{exp.title}} <span class="company">@{{exp.company}}</span></h2>
+                        <ul>
+                            {% for highlight in exp.highlights %}
+                                <li>{{highlight}}</li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
             {% endfor %}
         </div>
-        <div id="education" class="resume-section">
-            <h2 class="heading animate-on-scroll fade-up">Education</h2>
-            {% for edu in resume.education %}
+        <div id="resume-projects" class="resume-section">
+            <h2 class="heading animate-on-scroll fade-up">Projects</h2>
+            {% for project in resume.projects %}
                 <div class="resume-entry">
-                    <div class="resume-icon education"></div>
+                    <div class="resume-icon experience"></div>
                     <div class="resume-info">
-                        <span class="date">{{edu.start}} - {{edu.end}}</span>
-                        <h2>{{edu.degree}}</h2>
-                        <span class="company">{{edu.school}}</span>
-                        <p>{{edu.blurb}}</p>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-        <div id="publications" class="resume-section">
-            <h2 class="heading animate-on-scroll fade-up">Publications &amp; Awards</h2>
-            {% for pub in resume.publications %}
-                <div class="resume-entry">
-                    <div class="resume-icon publication"></div>
-                    <div class="resume-info">
-                        <span class="date">{{pub.date}}</span>
-                        <h2>{{pub.journal}}</h2>
-                        <span class="company">{{pub.authors}}</span>
-                        <p>{{pub.title}}</p>
+                        <span class="date">{{project.type}}</span>
+                        <h2>{{project.title}}</h2>
+                        <p>{{project.blurb}}</p>
+                        {% if project.slug or project.github %}
+                            <div class="resume-footer">
+                                {% if project.github %}
+                                    <a class="btn btn-primary" href="https://github.com/{{project.github}}" target="_blank">
+                                    <svg viewBox="0 0 24 24" fill="#FFFFFF">
+                                        <path d="m12 .5c-6.63 0-12 5.28-12 11.792 0 5.211 3.438 9.63 8.205 11.188.6.111.82-.254.82-.567 0-.28-.01-1.022-.015-2.005-3.338.711-4.042-1.582-4.042-1.582-.546-1.361-1.335-1.725-1.335-1.725-1.087-.731.084-.716.084-.716 1.205.082 1.838 1.215 1.838 1.215 1.07 1.803 2.809 1.282 3.495.981.108-.763.417-1.282.76-1.577-2.665-.295-5.466-1.309-5.466-5.827 0-1.287.465-2.339 1.235-3.164-.135-.298-.54-1.497.105-3.121 0 0 1.005-.316 3.3 1.209.96-.262 1.98-.392 3-.398 1.02.006 2.04.136 3 .398 2.28-1.525 3.285-1.209 3.285-1.209.645 1.624.24 2.823.12 3.121.765.825 1.23 1.877 1.23 3.164 0 4.53-2.805 5.527-5.475 5.817.42.354.81 1.077.81 2.182 0 1.578-.015 2.846-.015 3.229 0 .309.21.678.825.56 4.801-1.548 8.236-5.97 8.236-11.173 0-6.512-5.373-11.792-12-11.792z" />
+                                    </svg>
+                                    View on GitHub!
+                                    </a>
+                                {% endif %}
+                                {% if project.slug %}
+                                <a href="{{project.slug}}" class="btn">
+                                    Read More <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><g><rect fill="none" height="24" width="24"/></g><g><polygon points="6,6 6,8 14.59,8 5,17.59 6.41,19 16,9.41 16,18 18,18 18,6"/></g></svg>
+                                </a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
         </div>
         <div id="skills" class="resume-section">
-            <h2 class="heading animate-on-scroll fade-up">Skills</h2>
+            <h2 class="heading animate-on-scroll fade-up">Technical Skills</h2>
             <div class="flex showcase">
                 {% for skill in resume.skills.meters %}
                     <div class="flex flex-justify column flex-33 animate-on-scroll fade-up">
@@ -139,6 +146,7 @@ layout: base.njk
                         </div>
                     </div>
                 {% endfor %}
+            </div>
             <div class="flex flex-wrap">
                 {% for skill in resume.skills.bars %}
                     <div class="progress animate-on-scroll fade-up">
@@ -148,13 +156,52 @@ layout: base.njk
                 {% endfor %}
             </div>
         </div>
+        <div id="education" class="resume-section">
+            <h2 class="heading animate-on-scroll fade-up">Education</h2>
+            {% for edu in resume.education %}
+                <div class="resume-entry">
+                    <div class="resume-icon education"></div>
+                    <div class="resume-info">
+                        <span class="date">{{edu.school}} &mdash; {{edu.start}} - {{edu.end}}</span>
+                        <h2>{{edu.degree}}</h2>
+                        <p>{{edu.blurb}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div id="awards" class="resume-section">
+            <h2 class="heading animate-on-scroll fade-up">Awards</h2>
+            {% for award in resume.awards %}
+                <div class="resume-entry">
+                    <div class="resume-icon award"></div>
+                    <div class="resume-info">
+                        <span class="date">{{award.date}}</span>
+                        <h2>{{award.name}}</h2>
+                        <p>{{award.blurb}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div id="publications" class="resume-section">
+            <h2 class="heading animate-on-scroll fade-up">Publications</h2>
+            {% for pub in resume.publications %}
+                <div class="resume-entry">
+                    <div class="resume-icon publication"></div>
+                    <div class="resume-info">
+                        <span class="date">{{pub.journal}} &mdash; {{pub.date}}</span>
+                        <h2>{{pub.title}}</h2>
+                        <p>{{pub.authors}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 
 <section class="flex container column padded" id="projects">
     <div class="flex container column heading animate-on-scroll fade-up">
-        <h2>Projects</h2>
-        <p>A small sample of my work. More can be found on my <a href="https://github.com/zerebos" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+        <h2>Deep Dives</h2>
+        <p>A deeper look and retrospective on my past work. More can be found on my <a href="https://github.com/zerebos" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
     </div>
     <div class="flex flex-wrap">
         {% for proj in collections.projects %}

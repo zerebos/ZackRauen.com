@@ -19,6 +19,9 @@ body.dark {
     --background-main: #2A2A2A;
     --background-secondary: #181818;
     --background-tertiary: #1D1D1D;
+
+    --button-basic: #5d5d5d;
+    --button-hover: #6e6e6e;
 }
 
 *, ::before, ::after {
@@ -93,6 +96,7 @@ p {
 
 img {
     max-width: 100%;
+    object-fit: cover;
 }
 
 ul {
@@ -241,11 +245,12 @@ ul {
 }
 
 .btn {
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     line-height: 1.5;
     cursor: pointer;
+    background: var(--button-basic);
     /* border-radius: 40px; */
     /* box-shadow: 0 24px 36px -11px rgba(0,0,0,.09); */
     font-size: 12px;
@@ -257,6 +262,10 @@ ul {
     color: #fff;
     transition: color 200ms ease-in-out, background-color 200ms ease-in-out, border-color 200ms ease-in-out;
     clip-path: polygon(20px 0%, calc(100% - 20px) 0%, 100% 50%, calc(100% - 20px) 100%, 20px 100%, 0 50%);
+}
+
+.btn:hover {
+    background: var(--button-hover);
 }
 
 .btn.btn-primary {
@@ -739,14 +748,15 @@ button.expand {
     font-size: 30px;
     margin-bottom: 30px;
     color: var(--accent-color);
+    text-transform: uppercase;
 }
 
 #resume .resume-entry {
     display: flex;
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     border-bottom: 1px solid rgba(255,255,255,.1);
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }
 
 #resume .resume-icon {
@@ -774,10 +784,27 @@ button.expand {
     background-image: url(assets/icons/publication.svg);
 }
 
+#resume-projects .resume-icon {
+    background-image: url(assets/icons/terminal.svg);
+}
+
+#awards .resume-icon {
+    background-image: url(assets/icons/trophy.svg);
+}
+
+.resume-section + .resume-section {
+    margin-top: 50px;
+}
+
 .resume-info h2 {
     font-size: 24px;
     font-weight: 700;
+    margin-bottom: 0.7rem;
 }
+
+/* .resume-info:has(h3.company) h2 {
+    margin-bottom: 0;
+} */
 
 .resume-info h2 .self {
     color: var(--accent-color);
@@ -806,10 +833,41 @@ button.expand {
     color: var(--accent-color);
 }
 
-.resume-entry .company {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text-heading);
+/* .resume-entry .company { */
+    /* display: flex; */
+    /* font-size: 18px; */
+    /* font-weight: 700; */
+    /* color: var(--text-heading); */
+    /* margin-bottom: 0.5rem; */
+/* } */
+
+/* .resume-entry h3.company {
+    color: var(--accent-color);
+    margin-bottom: 0.7rem;
+} */
+
+.resume-entry h2 .company {
+    color: var(--accent-color);
+    font-size: inherit;
+}
+
+.resume-entry .resume-footer {
+    display: flex;
+    margin-top: 1.5rem;
+    gap: 1rem;
+}
+
+.resume-entry .resume-footer a {
+    padding: 0.5rem 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    /* border-bottom: 1px dotted var(--accent-color); */
+}
+
+.resume-entry .resume-footer a svg {
+    width: 16px;
+    height: 16px;
 }
 
 
@@ -1304,6 +1362,10 @@ ul.stats {
     margin-left: 15px;
     margin-bottom: 15px;
     background: var(--background-secondary)
+}
+
+.tile > h2 {
+    text-align: center;
 }
 
 .meter {
