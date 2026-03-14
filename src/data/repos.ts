@@ -1,15 +1,12 @@
+// TODO: dynamically all repos from GitHub API instead of hardcoding them here
+// Should use a high cache time since repos don't change that often, and this will reduce the number of API calls significantly
 export const betterdiscord = [
-    "BetterDiscord",
-    "Installer",
-    "docs",
-    "cli",
-    "PublicServers",
-    "BetterDiscordBot",
-    "find-process",
-    "yibn2008/find-process",
-    "winget-pkgs",
-    "microsoft/winget-pkgs",
-    "homebrew-tap"
+    "BetterDiscord/BetterDiscord",
+    "BetterDiscord/Installer",
+    "BetterDiscord/docs",
+    "BetterDiscord/cli",
+    "BetterDiscord/PublicServers",
+    "BetterDiscord/BetterDiscordBot",
 ];
 
 export const personal = [
@@ -45,27 +42,6 @@ export const personal = [
     "Object3D-Demo",
     "Hangman",
     "Tools-and-Utilities",
-    "awesome-trilium",
-    "trilium",
-    "Zerebos.com",
-    "prompts",
-    "foodoc",
-    "ExampleRepository",
-    "rauenzi.github.io",
-    "Z-Networking",
-    "BurstBoards",
-    "docking-station",
-    "open-source-games",
-    "BDWebTest",
-    "vscode-type-explorer",
-    "Kenji",
-    "Mutou",
-    "Lithesome",
-    "Nexterm",
-    "hecat",
-    "briefkasten-extension",
-    "homepage",
-    "ZackRauen.com"
 ];
 
 
