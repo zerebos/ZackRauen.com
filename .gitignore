@@ -3,6 +3,7 @@ dist/
 .cache/
 .env
 reference/
+notes/
 cwebp.exe
 example.json
 

@@ -982,6 +982,10 @@ section.half-padded {
     clip-path: var(--hex-clip);
 }
 
+#contact p {
+    text-align: center;
+}
+
 #contactform #honeypot,
 #contactform #company,
 #contactform [for="company"],

@@ -4,34 +4,49 @@ export default [
         end: "Present",
         title: "Firmware Recovery Lead Engineer",
         company: "IBM",
-        blurb: "Collaborated and coordinated built-in recovery systems for IBM System Z mainframes as the lead of sysplex recovery. Used my breadth of knowledge to guide other teams towards recovery safe practices."
+        highlights: [
+            "Lead engineer for sysplex recovery on IBM Z, designing and coordinating built-in recovery systems across mainframe firmware.",
+            "Guided cross-team architecture decisions, established recovery-safe development practices, and delivered reliability improvements for business-critical system components.",
+        ]
     },
     {
         start: "2019",
         end: "Nov 2021",
         title: "Firmware Engineer",
         company: "IBM",
-        blurb: "Worked as a member of a multi-squad tribe to deliver parallel sysplex on IBM Z systems. Using C/C++ and PL8 I was able to deliver business-critical functions and direct-to-client debugging."
+        highlights: [
+            "Developed core components of parallel sysplex for IBM Z using C/C++ and PL8, delivering high-availability firmware features and direct-to-client debugging support.",
+            "Collaborated across multiple squads to ship business-critical functionality for enterprise mainframe customers.",
+        ],
     },
     {
         start: "Aug 2016",
         end: "May 2018",
         title: "HCI + Behaviometrics Researcher",
         company: "Clarkson University",
-        blurb: "Worked on a crowdsensing application framework that introduced gesture and sociability-based user authentication. Combined the fields of HCI and behaviometrics in crowdsensing through a novel approach. Ran multiple experiment sessions and analyzed the data to confirm original theory."
+        highlights: [
+            "Designed and evaluated a crowdsensing-based continuous authentication framework combining HCI and behaviometrics.",
+            "Ran multi-session user studies, performed statistical analysis, and validated a novel gesture-and sociability-based verification approach.",
+        ],
     },
     {
         start: "May 2015",
         end: "Aug 2015",
         title: "Hardware & Software Developer Intern",
         company: "IBM",
-        blurb: "Used leadership and collaboration skills todevelop a new tool to test the hardware recovery of Z and P series mainframes across multiple sites(international)of IBM. Designed and implemented the firmware for the tool hardware as well as a remote GUI interface while collaborating on hardware design."
+        highlights: [
+            "Built a cross-site hardware recovery testing tool for IBM Z and Power systems, including embedded firmware, hardware collaboration, and a remote GUI interface.",
+            "Enabled multi-location testing and improved validation workflows for recovery hardware.",
+        ],
     },
     {
         start: "May 2014",
         end: "Aug 2014",
         title: "Biometrics Researcher",
         company: "Clarkson University",
-        blurb: "Designed and developed an algorithm for cyber security; user verification via keystroke biometrics. This included a basic computer learning aspect.User verification rates were increased from 80.2% to 96.8% and the false acceptance rates were decreased from 12% to 2.73%. Award won at the annual SURE Conference."
+        highlights: [
+            "Developed a keystroke-based user verification algorithm that improved accuracy from 80.2% to 96.8%.",
+            "Reduced false acceptance rates from 12% to 2.73% and earned recognition at the SURE Conference.",
+        ],
     },
 ];

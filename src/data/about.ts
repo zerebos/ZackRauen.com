@@ -1,5 +1,5 @@
 export default {
-    blurb: "Multidisciplinary engineer with experience across firmware, systems design, web technologies, open‑source development, and AI‑augmented workflows. Proven ability to modernize legacy systems, lead large‑scale projects, and deliver high‑impact solutions across diverse technical domains.",
+    blurb: "Multidisciplinary engineer with experience across firmware, systems design, web technologies, open-source development, and AI-augmented workflows. I specialize in modernizing legacy systems, leading large-scale projects, and delivering high-impact solutions across diverse technical domains.",
     fields: {
         Name: "Zack Rauen",
         Pronouns: "He/Him",
