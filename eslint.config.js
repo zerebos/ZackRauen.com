@@ -3,6 +3,17 @@ import ts from "@zerebos/eslint-config-typescript";
 
 /** @type {import("@zerebos/eslint-config-typescript").ConfigArray} */
 export default [
+    {
+        ignores: [
+            ".astro/**",
+            "dist/**",
+            "public/**",
+            "node_modules/**",
+            "**/*.d.ts",
+            "eslint.config.js",
+            "package-lock.json"
+        ]
+    },
     ...node,
     ...ts.configs.recommended,
     // {
