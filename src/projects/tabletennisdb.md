@@ -3,7 +3,6 @@ title: TableTennisDB
 blurb: Discord bot for table tennis equipment stats, world rankings, schedules and more!
 icon: tabletennisdb.png
 repo:  zerebos/TableTennisDB
-layout: project.njk
 ---
 
 # TableTennisDB
