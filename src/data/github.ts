@@ -1,4 +1,4 @@
-import {mkdir, readFile, writeFile} from "node:fs/promises";
+import {mkdir, readdir, readFile, writeFile} from "node:fs/promises";
 import repos from "./repos.ts";
 
 type RepoResponse = {
@@ -11,6 +11,8 @@ type RepoResponse = {
   pushed_at: string;
   license?: {name?: string | null} | null;
 };
+
+type RepoListResponse = RepoResponse[];
 
 type GithubData = {
   repos: string[];
@@ -81,17 +83,64 @@ async function fetchJson<T>(url: string): Promise<T | null> {
   }
 }
 
+async function fetchOwnerRepos(owner: string): Promise<RepoListResponse> {
+  const reposForOwner: RepoListResponse = [];
+  let page = 1;
+
+  while (true) {
+    const response = await fetchJson<RepoListResponse>(`https://api.github.com/users/${owner}/repos?per_page=100&page=${page}`);
+    if (!response?.length) break;
+
+    reposForOwner.push(...response);
+    if (response.length < 100) break;
+    page++;
+  }
+
+  return reposForOwner;
+}
+
+async function getProjectRepos() {
+  const projectsDir = new URL("../projects/", import.meta.url);
+  let files: string[];
+  try {
+    files = (await readdir(projectsDir)).filter((file) => file.endsWith(".md"));
+  }
+  catch {
+    return [];
+  }
+
+  const reposForProjects = await Promise.all(files.map(async (file) => {
+    try {
+      const raw = await readFile(new URL(file, projectsDir), "utf8");
+      const match = raw.match(/^\s*repo:\s*(.+)\s*$/m);
+      return match?.[1].trim() ?? "";
+    }
+    catch {
+      return "";
+    }
+  }));
+
+  return reposForProjects.filter(Boolean);
+}
+
 export default async function () {
   const cached = await readCache();
   if (cached) return cached;
 
   const fullRepoNames = repos.map((repo) => (repo.includes("/") ? repo : `zerebos/${repo}`));
+  const owners = [...new Set(fullRepoNames.map((repo) => repo.split("/")[0]))];
+  const reposByOwner = await Promise.all(owners.map(async (owner) => [owner, await fetchOwnerRepos(owner)] as const));
+  const allRepos = reposByOwner.flatMap(([, ownerRepos]) => ownerRepos);
+  const repoMap = new Map(allRepos.map((repo) => [repo.full_name, repo] as const));
+  const repoResults = fullRepoNames
+    .map((repo) => repoMap.get(repo))
+    .filter((repo): repo is RepoResponse => Boolean(repo));
 
-  const repoRequests = await Promise.all(fullRepoNames.map((repo) => fetchJson<RepoResponse>(`https://api.github.com/repos/${repo}`)));
-  const repoResults = repoRequests.filter((repo): repo is RepoResponse => Boolean(repo));
+  const projectRepos = new Set(await getProjectRepos());
+  const reposToExpand = fullRepoNames.filter((repo) => projectRepos.has(repo));
 
   const languageRequests = await Promise.all(
-    fullRepoNames.map(async (repo) => {
+    reposToExpand.map(async (repo) => {
       const languages = await fetchJson<Record<string, number>>(`https://api.github.com/repos/${repo}/languages`);
       if (!languages) return [repo, {}] as const;
 
@@ -108,7 +157,7 @@ export default async function () {
   );
 
   const branchRequests = await Promise.all(
-    fullRepoNames.map(async (repo) => {
+    reposToExpand.map(async (repo) => {
       const branches = await fetchJson<Array<{name: string}>>(`https://api.github.com/repos/${repo}/branches`);
       return [repo, branches?.map((branch) => branch.name) ?? []] as const;
     })

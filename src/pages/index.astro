@@ -13,7 +13,6 @@ import {getProjectEntries} from "../lib/projects.ts";
 
 const github = await getGithubData();
 const portfolioProjects = getProjectEntries();
-const vowels = ["a", "e", "i", "o", "u"];
 
 const resume = {
   experience,
@@ -264,7 +263,7 @@ const subtractFrom = (amount: string | number, from = 255) => (from - Number(amo
   </section>
 
   <script is:inline>
-    const vowels = {JSON.stringify(vowels)};
+    const vowels = ["a", "e", "i", "o", "u"];
     async function addJobTitle(title) {
       const jobTitle = document.querySelector("#jobtitle");
       for (let i = 0; i < title.length; i++) {
