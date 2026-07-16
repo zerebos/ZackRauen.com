@@ -56,9 +56,13 @@ async function load(): Promise<GitHubData> {
         }
     }
 
+    // Only look up languages and branches for repositories that actually
+    // loaded above. Iterating the successful `projects` (rather than every
+    // entry in `repos`) avoids redundant, failing requests for repos that are
+    // missing, private, or rate limited.
     const languages: Record<string, Record<string, number>> = {};
-    for (const repo of repos) {
-        const name = fullName(repo);
+    const branches: Record<string, string[]> = {};
+    for (const {full_name: name} of projects) {
         try {
             const raw = await cachedFetch<Record<string, number>>(`https://api.github.com/repos/${name}/languages`, {
                 duration: DAY,
@@ -66,19 +70,17 @@ async function load(): Promise<GitHubData> {
             });
             const total = Object.values(raw).reduce((sum, bytes) => sum + bytes, 0);
             const percentages: Record<string, number> = {};
-            for (const [language, bytes] of Object.entries(raw)) {
-                percentages[language] = Math.round((bytes / total) * 100 * 100) / 100;
+            if (total > 0) {
+                for (const [language, bytes] of Object.entries(raw)) {
+                    percentages[language] = Math.round((bytes / total) * 100 * 100) / 100;
+                }
             }
             languages[name] = percentages;
         }
         catch {
             // Ignore language lookup failures.
         }
-    }
 
-    const branches: Record<string, string[]> = {};
-    for (const repo of repos) {
-        const name = fullName(repo);
         try {
             const raw = await cachedFetch<Array<{name: string;}>>(`https://api.github.com/repos/${name}/branches`, {
                 duration: DAY,

@@ -88,6 +88,12 @@ if (contactForm && submitButton) {
             submitButton.classList.replace("btn-primary", "btn-danger");
             submitButton.textContent = "Something Went Wrong!";
             submitButton.disabled = true;
+
+            setTimeout(() => {
+                submitButton.classList.replace("btn-danger", "btn-primary");
+                submitButton.textContent = "Send Message!";
+                submitButton.disabled = false;
+            }, 5000);
         }
     });
 
