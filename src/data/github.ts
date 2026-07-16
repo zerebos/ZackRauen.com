@@ -30,7 +30,13 @@ export interface GitHubData {
 const headers: Record<string, string> = {
     "User-Agent": "@zerebos/ZackRauen.com",
 };
-if (process.env.GITHUB_TOKEN) headers.Authorization = process.env.GITHUB_TOKEN;
+const token = process.env.GITHUB_TOKEN;
+if (token) {
+    // GitHub requires an auth scheme (`Bearer <token>`). Tolerate a token that
+    // already includes a scheme so an existing `token …`/`Bearer …` value in the
+    // environment is not doubled up.
+    headers.Authorization = /^(bearer|token)\s/i.test(token) ? token : `Bearer ${token}`;
+}
 
 const fullName = (repo: string) => (repo.includes("/") ? repo : `zerebos/${repo}`);
 
