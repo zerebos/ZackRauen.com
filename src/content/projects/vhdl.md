@@ -3,7 +3,6 @@ title: VHDL Communications
 blurb: FPGA example showing different communications such as TTL, SPI and I2C.
 icon: vhdl.png
 repo:  zerebos/VHDL-Communications
-layout: project.njk
 ---
 
 VHDL Communications for an External 7 Segment Display.

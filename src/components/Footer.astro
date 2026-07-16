@@ -1,0 +1,43 @@
+---
+import Socials from "./Socials.astro";
+
+const links = [
+    {href: "/#home", label: "Home"},
+    {href: "/#about", label: "About"},
+    {href: "/#resume", label: "Resume"},
+    {href: "/#projects", label: "Projects"},
+    {href: "/#contact", label: "Contact"},
+];
+---
+
+<footer class="flex half-padded">
+    <div class="flex no-wrap column container">
+        <Socials />
+        <div class="flex flex-space-evenly columns">
+            <div class="flex column links animate-on-scroll fade-up">
+                <h2>Links</h2>
+                <ul>
+                    {links.map(link => (
+                        <li><a href={link.href} class="nav-link">{link.label}</a></li>
+                    ))}
+                </ul>
+            </div>
+            <div class="flex column about animate-on-scroll fade-up">
+                <h2>Site Info</h2>
+                <p>This website is completely static and generated from locally cached data and built using an SSG. It is also completely open source! Feel free to take a look at it on <a href="https://github.com/zerebos/ZackRauen.com" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+            </div>
+            <div class="flex column credits animate-on-scroll fade-up">
+                <h2>Credits</h2>
+                <ul>
+                    <li>Built with &#x2764; using <a href="https://astro.build/" target="_blank" rel="noopener noreferrer">Astro</a></li>
+                    <li>Contact form using <a href="https://www.staticforms.xyz/" target="_blank" rel="noopener noreferrer">StaticForms</a></li>
+                    <li>Hex background by <a href="https://www.freepik.com/free-vector/abstract-techno-banner-with-hexagonal-design_10412350.htm#query=hex%20pattern&position=11&from_view=search&track=sph" target="_blank" rel="noopener noreferrer">kjpargeter</a></li>
+                    <li>Layout inspired by <a href="https://colorlib.com/wp/template/ronaldo/" target="_blank" rel="noopener noreferrer">Colorlib</a></li>
+                    <li>Material icons from <a href="https://material.io/" target="_blank" rel="noopener noreferrer">Google</a></li>
+                    <li>Testing and input from <a href="https://github.com/ItMeSarah/" target="_blank" rel="noopener noreferrer">ItMeSarah</a></li>
+                    <li>Input from <a href="https://github.com/qwerasd205" target="_blank" rel="noopener noreferrer">Qwerasd</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
