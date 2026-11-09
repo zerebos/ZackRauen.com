@@ -1,0 +1,27 @@
+---
+const links = [
+    {href: "/#home", label: "Home"},
+    {href: "/#about", label: "About"},
+    {href: "/#resume", label: "Resume"},
+    {href: "/#projects", label: "Projects"},
+    {href: "/#contact", label: "Contact"},
+];
+---
+
+<div class="sticky-wrap">
+    <nav id="main-nav" class="collapse">
+        <div class="container">
+            <a href="/"><span class="brand">ZackRauen</span></a>
+            <button id="menuButton" class="expand left" aria-label="Menu">
+                <span class="rectangle"></span>
+                <span class="rectangle"></span>
+                <span class="rectangle"></span>
+            </button>
+            <ul class="navbar-nav nav ml-auto">
+                {links.map(link => (
+                    <li class="nav-item"><a href={link.href} class="nav-link">{link.label}</a></li>
+                ))}
+            </ul>
+        </div>
+    </nav>
+</div>

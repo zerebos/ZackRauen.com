@@ -1,0 +1,13 @@
+---
+import socials from "../data/socials";
+
+const entries = Object.entries(socials);
+---
+
+<div class="flex socials">
+    {entries.map(([label, value]) => (
+        <a href={value} class={`${label.toLowerCase()} animate-on-scroll fade-up`} target="_blank" rel="me noopener">
+            <img src={`/assets/socials/${label.toLowerCase()}_small.png`} class="social-icon" alt={label} />
+        </a>
+    ))}
+</div>

@@ -1,89 +1,111 @@
 import dotenv from "dotenv";
-// @ts-expect-error - no types for this package
-import cachedFetch from "@11ty/eleventy-fetch";
+import {cachedFetch, DAY} from "../lib/cache";
 import repos from "./repos";
 
 dotenv.config();
 
-const fetchOptions = {
-    headers: {
-        "Authorization": process.env.GITHUB_TOKEN,
-        "User-Agent": "@zerebos/ZackRauen.com"
-    }
+/** The subset of the GitHub repository payload consumed by the templates. */
+export interface GitHubRepo {
+    full_name: string;
+    default_branch: string;
+    license: {name: string;} | null;
+    pushed_at: string;
+    stargazers_count: number;
+    subscribers_count: number;
+    forks: number;
+    open_issues: number;
+    open_issues_count: number;
+}
+
+export interface GitHubData {
+    repos: string[];
+    languages: Record<string, Record<string, number>>;
+    branches: Record<string, string[]>;
+    count: number;
+    stars: number;
+    issues: number;
+    projects: GitHubRepo[];
+}
+
+const headers: Record<string, string> = {
+    "User-Agent": "@zerebos/ZackRauen.com",
 };
+const token = process.env.GITHUB_TOKEN;
+if (token) {
+    // GitHub requires an auth scheme (`Bearer <token>`). Tolerate a token that
+    // already includes a scheme so an existing `token …`/`Bearer …` value in the
+    // environment is not doubled up.
+    headers.Authorization = /^(bearer|token)\s/i.test(token) ? token : `Bearer ${token}`;
+}
 
-export default async function () {
-    const repoResults = [];
+const fullName = (repo: string) => (repo.includes("/") ? repo : `zerebos/${repo}`);
+
+let cache: Promise<GitHubData> | null = null;
+
+async function load(): Promise<GitHubData> {
+    const projects: GitHubRepo[] = [];
     for (const repo of repos) {
         try {
-            const resp = await cachedFetch(`https://api.github.com/repos/${repo.includes("/") ? repo : "zerebos/" + repo}`, {
-                duration: "1d", // 1 day
-                type: "json", // also supports "text" or "buffer"
-                verbose: true,
-                fetchOptions: fetchOptions
+            projects.push(await cachedFetch<GitHubRepo>(`https://api.github.com/repos/${fullName(repo)}`, {
+                duration: DAY,
+                headers,
+            }));
+        }
+        catch {
+            // Skip repos that fail to load (e.g. rate limiting, private, deleted).
+        }
+    }
+
+    // Only look up languages and branches for repositories that actually
+    // loaded above. Iterating the successful `projects` (rather than every
+    // entry in `repos`) avoids redundant, failing requests for repos that are
+    // missing, private, or rate limited.
+    const languages: Record<string, Record<string, number>> = {};
+    const branches: Record<string, string[]> = {};
+    for (const {full_name: name} of projects) {
+        try {
+            const raw = await cachedFetch<Record<string, number>>(`https://api.github.com/repos/${name}/languages`, {
+                duration: DAY,
+                headers,
             });
-            repoResults.push(resp);
-        }
-        catch {
-            // Do nothing
-        }
-    }
-
-    const langResults: Record<string, Record<string, number>> = {};
-    for (const repo of repos) {
-        const fullName = repo.includes("/") ? repo : "zerebos/" + repo;
-        try {
-            const temp = await cachedFetch(`https://api.github.com/repos/${fullName}/languages`, {
-                duration: "1d", // 1 day
-                type: "json", // also supports "text" or "buffer"
-                verbose: true,
-                fetchOptions: fetchOptions
-            }) as Record<string, number>;
-            const current = Object.assign({}, temp);
-            // console.log(current);
-
-            const sum = Object.values(current).reduce((prev, curr) => prev + curr, 0);
-            for (const lang in current) {
-                const portion = current[lang];
-                const decimal = portion / sum;
-                // console.log({portion, sum});
-                current[lang] = Math.round(decimal * 100 * 100) / 100;
+            const total = Object.values(raw).reduce((sum, bytes) => sum + bytes, 0);
+            const percentages: Record<string, number> = {};
+            if (total > 0) {
+                for (const [language, bytes] of Object.entries(raw)) {
+                    percentages[language] = Math.round((bytes / total) * 100 * 100) / 100;
+                }
             }
-
-            langResults[fullName] = current;
-            // console.log(current);
-            // console.log("")
+            languages[name] = percentages;
         }
         catch {
-            // do nothing
+            // Ignore language lookup failures.
         }
-    }
 
-    const branchResults: Record<string, string[]> = {};
-    for (const repo of repos) {
-        const fullName = repo.includes("/") ? repo : "zerebos/" + repo;
         try {
-            const current = await cachedFetch(`https://api.github.com/repos/${fullName}/branches`, {
-                duration: "1d", // 1 day
-                type: "json", // also supports "text" or "buffer"
-                verbose: true,
-                fetchOptions: fetchOptions
-            }) as Array<{name: string;}>;
-
-            branchResults[fullName] = current.map(b => b.name);
+            const raw = await cachedFetch<Array<{name: string;}>>(`https://api.github.com/repos/${name}/branches`, {
+                duration: DAY,
+                headers,
+            });
+            branches[name] = raw.map(branch => branch.name);
         }
         catch {
-            // do nothing
+            // Ignore branch lookup failures.
         }
     }
 
     return {
-        repos: repos,
-        languages: langResults,
-        branches: branchResults,
-        count: repoResults.length,
-        stars: repoResults.reduce((prev, current) => prev + current.stargazers_count, 0),
-        issues: repoResults.reduce((prev, current) => prev + current.open_issues_count, 0),
-        projects: repoResults
+        repos,
+        languages,
+        branches,
+        count: projects.length,
+        stars: projects.reduce((sum, repo) => sum + repo.stargazers_count, 0),
+        issues: projects.reduce((sum, repo) => sum + repo.open_issues_count, 0),
+        projects,
     };
+}
+
+/** Fetch and aggregate GitHub stats, memoized so a single build only loads once. */
+export default function github(): Promise<GitHubData> {
+    cache ??= load();
+    return cache;
 }

@@ -3,7 +3,6 @@ title: Block Catcher
 blurb: A WebGL game in which you must catch as many blocks as possible until time runs out.
 icon: blockcatcher.png
 repo:  zerebos/BlockCatcher
-layout: project.njk
 ---
 
 # Block Catcher

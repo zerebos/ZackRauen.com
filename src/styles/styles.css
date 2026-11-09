@@ -429,7 +429,7 @@ button.expand {
     /* background-position: center center; */
     display: block;
 
-    background: url("assets/backgrounds/lighthex.webp") center/cover #202020;
+    background: url("/assets/backgrounds/lighthex.webp") center/cover #202020;
 }
 
 @keyframes rainbow {
@@ -583,7 +583,7 @@ button.expand {
     content: "";
     display: block;
     position: absolute;
-    background: url("assets/backgrounds/darkhex.webp") center/cover;
+    background: url("/assets/backgrounds/darkhex.webp") center/cover;
     width: 100vw;
     height: calc(100vh - 60px);
     /* top: 0; */
@@ -773,23 +773,23 @@ button.expand {
 }
 
 #education .resume-icon {
-    background-image: url(assets/icons/education.svg);
+    background-image: url(/assets/icons/education.svg);
 }
 
 #experience .resume-icon {
-    background-image: url(assets/icons/experience.svg);
+    background-image: url(/assets/icons/experience.svg);
 }
 
 #publications .resume-icon {
-    background-image: url(assets/icons/publication.svg);
+    background-image: url(/assets/icons/publication.svg);
 }
 
 #resume-projects .resume-icon {
-    background-image: url(assets/icons/terminal.svg);
+    background-image: url(/assets/icons/terminal.svg);
 }
 
 #awards .resume-icon {
-    background-image: url(assets/icons/trophy.svg);
+    background-image: url(/assets/icons/trophy.svg);
 }
 
 .resume-section + .resume-section {
