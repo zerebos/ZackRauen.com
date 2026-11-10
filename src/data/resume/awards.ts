@@ -1,5 +1,15 @@
 export default [
     {
+        date: "June 2026",
+        name: "Codex for Open Source",
+        blurb: "Given out by OpenAI to recognize the maintainers behind critical open-source software.",
+    },
+    {
+        date: "March 2026",
+        name: "Claude for Open Source",
+        blurb: "Given out by Anthropic to recognize developers and maintainers of high-impact open source projects.",
+    },
+    {
         date: "July 2025",
         name: "IBM Client Care Award",
         blurb: "Recognizes developers who deliver exceptional client-focused features, debugging, and consultation.",
