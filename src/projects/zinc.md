@@ -2,6 +2,7 @@
 title: Zinc
 blurb: A precise, native terminal for Windows.
 icon: zinc.webp
+repo: zerebos/zinc
 order: 3
 layout: project.njk
 ---
