@@ -63,7 +63,7 @@ The numbers show the shift from the previous era (2021–2024). In 2025, **73 pu
 
 ## Handing it off
 
-In December 2025 I officially stepped back, and doggybootsy became the lead developer with Arven joining the core team. I wrote about that in [Passing the Torch](/blog/betterdiscord-passing-the-torch).
+In December 2025 I officially stepped back, and doggybootsy became the lead developer with Arven joining the core team. I wrote about that in [Passing the Torch](https://zerebos.com/blog/betterdiscord-passing-the-torch).
 
 The team has kept shipping without me as the bottleneck, which was the whole point of the last few years. That includes the `1.14` release in August 2026 with a new injection method and a published types package for plugin developers.
 
