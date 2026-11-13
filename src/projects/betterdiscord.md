@@ -1,6 +1,6 @@
 ---
 title: BetterDiscord
-blurb: A popular 3rd party modification for the Discord instant messaging platform.
+blurb: The Discord customization project.
 icon: betterdiscord.png
 repo: BetterDiscord/BetterDiscord
 layout: project.njk

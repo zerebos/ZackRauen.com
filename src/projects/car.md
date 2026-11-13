@@ -1,12 +1,12 @@
 ---
 title: Self-Driving Car
-blurb: A hardware project where a custom built mini-car was made to drive itself on an unknown course.
+blurb: Custom mini-car driving on unknown courses.
 icon: car.webp
 repo: zerebos/Intelligent-Line-And-Marker-Tracking-Car
 layout: project.njk
 ---
 
-# Intelligent Car
+# Self-Driving Car
 
 <img src="/assets/projects/images/car.webp" alt="Self-Driving Car" />
 
