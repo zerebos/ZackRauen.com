@@ -3,6 +3,7 @@ title: BetterDiscord
 blurb: The Discord customization project.
 icon: betterdiscord.png
 repo: BetterDiscord/BetterDiscord
+order: 1
 layout: project.njk
 ---
 

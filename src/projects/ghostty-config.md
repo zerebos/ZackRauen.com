@@ -3,6 +3,7 @@ title: Ghostty Config
 blurb: A visual config generator for the Ghostty terminal.
 icon: ghostty-config.webp
 repo: zerebos/ghostty-config
+order: 2
 layout: project.njk
 ---
 

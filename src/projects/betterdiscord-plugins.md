@@ -3,6 +3,7 @@ title: BetterDiscord Plugins
 blurb: Plugins, a theme, and the library behind them.
 icon: betterdiscord-plugins.webp
 repo: zerebos/BetterDiscordAddons
+order: 7
 layout: project.njk
 ---
 

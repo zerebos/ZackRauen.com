@@ -3,6 +3,7 @@ title: Installer
 blurb: A desktop app that puts BetterDiscord into Discord.
 icon: installer.png
 repo: BetterDiscord/Installer
+order: 6
 layout: project.njk
 ---
 

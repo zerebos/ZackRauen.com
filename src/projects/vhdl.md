@@ -3,6 +3,7 @@ title: VHDL Communications
 blurb: TL, SPI & I2C on an FPGA.
 icon: vhdl.png
 repo:  zerebos/VHDL-Communications
+order: 9
 layout: project.njk
 ---
 

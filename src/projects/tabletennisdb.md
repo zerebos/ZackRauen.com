@@ -3,6 +3,7 @@ title: TableTennisDB
 blurb: Table Tennis bot for Discord.
 icon: tabletennisdb.png
 repo:  zerebos/TableTennisDB
+order: 8
 layout: project.njk
 ---
 

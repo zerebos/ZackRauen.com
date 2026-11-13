@@ -3,6 +3,7 @@ title: Self-Driving Car
 blurb: Custom mini-car driving on unknown courses.
 icon: car.webp
 repo: zerebos/Intelligent-Line-And-Marker-Tracking-Car
+order: 5
 layout: project.njk
 ---
 

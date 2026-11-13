@@ -3,6 +3,7 @@ title: Block Catcher
 blurb: A tiny arcade game about catching falling blocks.
 icon: blockcatcher.png
 repo:  zerebos/BlockCatcher
+order: 4
 layout: project.njk
 ---
 

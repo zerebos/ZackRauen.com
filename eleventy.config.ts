@@ -37,8 +37,13 @@ export default async function (eleventyConfig: EleventyConfig) {
         return date.toLocaleDateString(format, opts);
     });
 
+    // `11ty.ts` types collection items as the `page` object, but real items also carry the template's `data`
+    type ProjectItem = {data: {order?: number;};};
+
     function getPosts(collectionApi: CollectionsAPI) {
-        return collectionApi.getFilteredByGlob("./src/projects/*.md");
+        const projects = collectionApi.getFilteredByGlob("./src/projects/*.md") as unknown as ProjectItem[];
+        // Projects without an `order` go last
+        return projects.sort((a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity));
     }
 
     eleventyConfig.addCollection("projects", function (collection) {
